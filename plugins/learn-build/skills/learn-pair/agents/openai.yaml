@@ -1,0 +1,4 @@
+interface:
+  display_name: "Learn Pair"
+  short_description: "Pair programming, discussion, QA, and design decisions"
+  default_prompt: "Use $learn-pair as I implement, discuss, debug, and run QA; sync documentation from new evidence."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Learn Blueprint"
+  short_description: "Product architecture and a learning-by-building roadmap"
+  default_prompt: "Use $learn-blueprint to build a blueprint and tutorial roadmap from product goals and the current repository."

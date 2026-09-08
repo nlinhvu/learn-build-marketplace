@@ -1,0 +1,20 @@
+{
+  "name": "learn-build-marketplace",
+  "interface": {
+    "displayName": "Learn Build Marketplace"
+  },
+  "plugins": [
+    {
+      "name": "learn-build",
+      "source": {
+        "source": "local",
+        "path": "./plugins/learn-build"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    }
+  ]
+}

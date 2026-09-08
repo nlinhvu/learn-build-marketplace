@@ -1,0 +1,27 @@
+{
+  "name": "learn-build-marketplace",
+  "version": "0.1.0",
+  "description": "Build enterprise products through incremental tutorials while owning the code, architecture decisions, and real-world verification.",
+  "license": "Apache-2.0",
+  "author": "nlinhvu",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nlinhvu/learn-build-marketplace.git"
+  },
+  "keywords": [
+    "pi-package",
+    "agent-skills",
+    "tutorials",
+    "architecture"
+  ],
+  "files": [
+    "plugins/learn-build",
+    "README.md",
+    "LICENSE"
+  ],
+  "pi": {
+    "skills": [
+      "./plugins/learn-build/skills"
+    ]
+  }
+}

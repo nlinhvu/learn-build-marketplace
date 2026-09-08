@@ -1,0 +1,11 @@
+{
+  "name": "learn-build",
+  "version": "0.1.0",
+  "description": "Build enterprise products through incremental tutorials while owning the code, architecture decisions, and real-world verification.",
+  "author": {
+    "name": "nlinhvu"
+  },
+  "homepage": "https://github.com/nlinhvu/learn-build-marketplace",
+  "repository": "https://github.com/nlinhvu/learn-build-marketplace",
+  "license": "Apache-2.0"
+}

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Learn Guide"
+  short_description: "Incremental tutorials grounded in source and real QA"
+  default_prompt: "Use $learn-guide to design the next tutorial with explanations, visuals, code, and a QA walkthrough."

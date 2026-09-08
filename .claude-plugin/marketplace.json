@@ -1,0 +1,16 @@
+{
+  "name": "learn-build-marketplace",
+  "owner": {
+    "name": "nlinhvu"
+  },
+  "plugins": [
+    {
+      "name": "learn-build",
+      "source": "./plugins/learn-build",
+      "description": "Build enterprise products through incremental tutorials while owning the code, architecture decisions, and real-world verification."
+    }
+  ],
+  "metadata": {
+    "description": "Learn while building enterprise products with full product ownership."
+  }
+}

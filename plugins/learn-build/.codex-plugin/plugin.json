@@ -1,0 +1,19 @@
+{
+  "name": "learn-build",
+  "version": "0.1.0",
+  "description": "Build enterprise products through incremental tutorials while owning the code, architecture decisions, and real-world verification.",
+  "author": {
+    "name": "nlinhvu"
+  },
+  "homepage": "https://github.com/nlinhvu/learn-build-marketplace",
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Learn Build",
+    "shortDescription": "Build, understand, and own your product.",
+    "longDescription": "Build enterprise products through incremental tutorials while owning the code, architecture decisions, and real-world verification.",
+    "developerName": "nlinhvu",
+    "category": "Productivity",
+    "capabilities": [],
+    "defaultPrompt": "Help me build and understand my product using the Learn Build workflow."
+  }
+}
