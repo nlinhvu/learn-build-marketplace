@@ -1,0 +1,4 @@
+interface:
+  display_name: "Learn Guide (Tiếng Việt)"
+  short_description: "Tutorial từng bước, bám source và có QA thực tế"
+  default_prompt: "Dùng $learn-guide để thiết kế tutorial tiếp theo với explanation, visuals, code và QA walkthrough."

@@ -1,7 +1,7 @@
 {
-  "name": "learn-build",
+  "name": "learn-build-vn",
   "version": "0.3.0",
-  "description": "Build enterprise products through incremental tutorials while owning the code, architecture decisions, and real-world verification.",
+  "description": "Build enterprise product với hướng dẫn tiếng Việt, technical terms/code tiếng Anh và khả năng tự làm chủ.",
   "author": {
     "name": "nlinhvu"
   },

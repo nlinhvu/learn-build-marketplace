@@ -1,0 +1,4 @@
+interface:
+  display_name: "Learn Blueprint (Tiếng Việt)"
+  short_description: "Toàn cảnh product và lộ trình vừa học vừa build"
+  default_prompt: "Dùng $learn-blueprint để xây blueprint và lộ trình tutorials từ product goals cùng repo hiện tại."

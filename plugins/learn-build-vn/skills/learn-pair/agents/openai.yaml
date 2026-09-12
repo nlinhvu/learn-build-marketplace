@@ -1,0 +1,4 @@
+interface:
+  display_name: "Learn Pair (Tiếng Việt)"
+  short_description: "Pair programming, discuss, QA và architecture decisions"
+  default_prompt: "Dùng $learn-pair đồng hành khi tôi implement, discuss, debug và QA; sync docs từ evidence mới."

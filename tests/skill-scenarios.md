@@ -53,3 +53,11 @@ Check that existing paths stay canonical and the legacy ADR is not converted or 
 > Review the active tutorial and explain the pending design question. Do not edit any files.
 
 Check that the agent respects read-only scope, supplies proposed context updates when relevant, and explicitly distinguishes proposed updates from persisted memory. Retention instructions do not expand write authority.
+
+## Quy ước ngôn ngữ của learn-build-vn
+
+Chạy các tình huống trên với bản `learn-build-vn`, rồi yêu cầu:
+
+> Giải thích idempotency và tenant isolation trong một trang HTML, kèm sequence diagram, glossary, trade-off, lý do và kết luận. Cho một ví dụ source code và test có comments, docstrings, test names, assertions và runtime strings. Không thay đổi source của project.
+
+Kiểm phần trao đổi, hướng dẫn, giải thích, nhãn sơ đồ, kết luận và records dùng tiếng Việt; technical terminology và specialized words giữ tiếng Anh. Toàn bộ source/test code dùng tiếng Anh, kể cả comments, docstrings, test names, assertions và runtime strings. HTML dùng `lang="vi"`; API names, commands, paths và log output được giữ nguyên. Không dịch code hoặc evidence để đáp ứng ngôn ngữ trình bày. Giữ đầy đủ nội dung và mức độ trực quan của bản tiếng Anh, không rút thành bảng thuật ngữ hoặc danh sách trạng thái. Yêu cầu giải thích không cho phép sửa source của project.

@@ -10,6 +10,7 @@ from datetime import datetime, timezone
 
 SKILLS = ('learn-blueprint', 'learn-guide', 'learn-pair')
 SOURCE = Path(__file__).resolve().parents[1] / 'plugins' / 'learn-build' / 'skills'
+SOURCES = {'en': SOURCE, 'vi': SOURCE.parent.parent / 'learn-build-vn' / 'skills'}
 USER_DIRS = {'codex': '.codex/skills', 'claude': '.claude/skills', 'cursor': '.cursor/skills', 'pi': '.pi/agent/skills'}
 PROJECT_DIRS = {**USER_DIRS, 'codex': '.agents/skills', 'pi': '.pi/skills'}
 
@@ -25,11 +26,12 @@ def identical(left, right):
     return all(identical(left / name, right / name) for name in comparison.common_dirs)
 
 
-def install(destination, force=False, dry_run=False):
+def install(destination, force=False, dry_run=False, source_root=None):
     destination = Path(destination).expanduser().absolute()
+    source_root = Path(source_root) if source_root is not None else SOURCE
     changed = []
     for name in SKILLS:
-        source, target = SOURCE / name, destination / name
+        source, target = source_root / name, destination / name
         if not (source / 'SKILL.md').is_file():
             raise ValueError(f'Missing source skill: {source}')
         if target.is_symlink():
@@ -77,6 +79,8 @@ def main():
     target.add_argument('--dest', type=Path, help='Custom skills directory for another compatible agent')
     parser.add_argument('--scope', choices=('user', 'project'), default='user')
     parser.add_argument('--project-root', type=Path)
+    parser.add_argument('--language', choices=SOURCES, default='en',
+                        help='Skill language: en (learn-build, default) or vi (learn-build-vn)')
     parser.add_argument('--force', action='store_true', help='Back up differing existing skills before replacement')
     parser.add_argument('--dry-run', action='store_true')
     args = parser.parse_args()
@@ -93,7 +97,7 @@ def main():
     else:
         destination = Path.home() / USER_DIRS[args.agent]
     try:
-        install(destination, args.force, args.dry_run)
+        install(destination, args.force, args.dry_run, source_root=SOURCES[args.language])
     except (ValueError, OSError) as error:
         parser.exit(1, f'{error}\n')
 

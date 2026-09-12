@@ -1,0 +1,19 @@
+{
+  "name": "learn-build-vn",
+  "version": "0.3.0",
+  "description": "Build enterprise product với hướng dẫn tiếng Việt, technical terms/code tiếng Anh và khả năng tự làm chủ.",
+  "author": {
+    "name": "nlinhvu"
+  },
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Learn Build — Tiếng Việt",
+    "shortDescription": "Vừa build, vừa hiểu và tự làm chủ product.",
+    "longDescription": "Build enterprise product với hướng dẫn tiếng Việt, technical terms/code tiếng Anh và khả năng tự làm chủ.",
+    "developerName": "nlinhvu",
+    "category": "Productivity",
+    "capabilities": [],
+    "defaultPrompt": "Giúp tôi build và hiểu product theo Learn Build bằng tiếng Việt."
+  },
+  "homepage": "https://github.com/nlinhvu/learn-build-marketplace"
+}

@@ -8,6 +8,11 @@
       "name": "learn-build",
       "source": "./plugins/learn-build",
       "description": "Build enterprise products through incremental tutorials while owning the code, architecture decisions, and real-world verification."
+    },
+    {
+      "name": "learn-build-vn",
+      "source": "./plugins/learn-build-vn",
+      "description": "Build enterprise product với hướng dẫn tiếng Việt, technical terms/code tiếng Anh và full ownership."
     }
   ],
   "metadata": {

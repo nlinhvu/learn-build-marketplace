@@ -6,24 +6,36 @@ import re
 
 ROOT = Path(__file__).resolve().parents[1]
 NAMES = ('learn-blueprint', 'learn-guide', 'learn-pair')
+PLUGINS = ('learn-build', 'learn-build-vn')
 
 
 def validate():
-    plugin = ROOT / 'plugins/learn-build'
     package = json.loads((ROOT / 'package.json').read_text(encoding='utf-8'))
-    for kind in ('.codex-plugin', '.claude-plugin'):
-        manifest = json.loads((plugin / kind / 'plugin.json').read_text(encoding='utf-8'))
-        assert manifest['name'] == 'learn-build'
-        assert manifest['version'] == package['version']
+    for name in PLUGINS:
+        validate_plugin(ROOT / 'plugins' / name, package['version'])
     for kind in ('.agents/plugins', '.claude-plugin'):
         market = json.loads((ROOT / kind / 'marketplace.json').read_text(encoding='utf-8'))
         assert market['name'] == 'learn-build-marketplace'
-        assert len(market['plugins']) == 1
-        entry = market['plugins'][0]
-        assert entry['name'] == 'learn-build'
-        source = entry['source']
-        assert (ROOT / (source['path'] if isinstance(source, dict) else source)).resolve() == plugin.resolve()
+        assert [entry['name'] for entry in market['plugins']] == list(PLUGINS)
+        for entry in market['plugins']:
+            source = entry['source']
+            assert (ROOT / (source['path'] if isinstance(source, dict) else source)).resolve() == (
+                ROOT / 'plugins' / entry['name']).resolve()
     assert package['pi']['skills'] == ['./plugins/learn-build/skills']
+    for name in PLUGINS:
+        assert f'plugins/{name}' in package['files'], f'Plugin excluded from package: {name}'
+    for name in NAMES:
+        roots = [ROOT / 'plugins' / plugin / 'skills' / name for plugin in PLUGINS]
+        resources = [{p.relative_to(root) for p in root.rglob('*') if p.is_file()} for root in roots]
+        assert resources[0] == resources[1], f'Localized resources differ: {name}'
+    print('Distribution metadata and skill resources are valid.')
+
+
+def validate_plugin(plugin, version):
+    for kind in ('.codex-plugin', '.claude-plugin'):
+        manifest = json.loads((plugin / kind / 'plugin.json').read_text(encoding='utf-8'))
+        assert manifest['name'] == plugin.name
+        assert manifest['version'] == version
     shared = {}
     for name in NAMES:
         skill = plugin / 'skills' / name
@@ -42,7 +54,8 @@ def validate():
             if path.suffix in ('.md', '.yaml', '.html', '.css'):
                 text = path.read_text(encoding='utf-8')
                 assert '/Users/linhvu/' not in text, path
-                assert not re.search(r'Vietnamese|tiếng Việt|tiếng Anh', text, re.I), path
+                if plugin.name == 'learn-build':
+                    assert not re.search(r'Vietnamese|tiếng Việt|tiếng Anh', text, re.I), path
                 if path.suffix == '.md':
                     for link in re.findall(r'\[[^\]]*\]\(([^)]+)\)', text):
                         if '://' in link or link.startswith('#'):
@@ -50,7 +63,6 @@ def validate():
                         target = (path.parent / link.split('#')[0]).resolve()
                         assert target.is_relative_to(skill.resolve()), f'External skill dependency: {path}: {link}'
                         assert target.exists(), f'Broken link: {path}: {link}'
-    print('Distribution metadata and skill resources are valid.')
 
 
 if __name__ == '__main__':

@@ -109,6 +109,31 @@ class InstallerTests(unittest.TestCase):
         self.assertNotEqual(0, result.returncode)
         self.assertFalse(self.dest.exists())
 
+    def test_cli_vietnamese_installs_complete_localized_skills(self):
+        result = subprocess.run([sys.executable, str(ROOT / 'scripts/install.py'),
+                                 '--dest', str(self.dest), '--language', 'vi'],
+                                capture_output=True, text=True)
+        self.assertEqual(0, result.returncode, result.stderr)
+        source = ROOT / 'plugins/learn-build-vn/skills'
+        for name in installer.SKILLS:
+            self.assertTrue(installer.identical(source / name, self.dest / name))
+
+    def test_language_switch_requires_force_and_preserves_previous_version(self):
+        command = [sys.executable, str(ROOT / 'scripts/install.py'), '--dest', str(self.dest)]
+        english = subprocess.run(command, capture_output=True, text=True)
+        self.assertEqual(0, english.returncode, english.stderr)
+        previous = (self.dest / 'learn-guide/SKILL.md').read_bytes()
+        conflict = subprocess.run(command + ['--language', 'vi'], capture_output=True, text=True)
+        self.assertNotEqual(0, conflict.returncode)
+        self.assertEqual(previous, (self.dest / 'learn-guide/SKILL.md').read_bytes())
+        switched = subprocess.run(command + ['--language', 'vi', '--force'], capture_output=True, text=True)
+        self.assertEqual(0, switched.returncode, switched.stderr)
+        backups = list((self.dest.parent / '.learn-build-backups').rglob('learn-guide/SKILL.md'))
+        self.assertEqual(1, len(backups))
+        self.assertEqual(previous, backups[0].read_bytes())
+        self.assertTrue(installer.identical(ROOT / 'plugins/learn-build-vn/skills/learn-guide',
+                                           self.dest / 'learn-guide'))
+
 
 if __name__ == '__main__':
     unittest.main()

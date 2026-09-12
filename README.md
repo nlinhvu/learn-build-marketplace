@@ -4,7 +4,7 @@ Build an enterprise product you understand and own, one runnable tutorial at a t
 
 The highest priority is both the enterprise product you intend and your ability to develop, change, diagnose, release, operate, and recover it without an AI coding agent. Rich visual HTML and durable discussion records support those outcomes. Delegated implementation remains welcome; agent completion and your independent ownership are tracked separately.
 
-This marketplace contains **one plugin, `learn-build`, with three skills**. It connects product direction, architecture decisions, implementation, and hands-on verification without asking you to decide an entire future phase before you have learned from the current slice.
+This marketplace contains **two language editions: `learn-build` (English) and `learn-build-vn` (Vietnamese), each with the same three skills**. They connect product direction, architecture decisions, implementation, and hands-on verification without asking you to decide an entire future phase before you have learned from the current slice.
 
 | Skill | Purpose |
 | --- | --- |
@@ -47,6 +47,38 @@ pi install git:github.com/nlinhvu/learn-build-marketplace
 ```
 
 Invoke `/skill:learn-blueprint`, `/skill:learn-guide`, or `/skill:learn-pair`. Add `-l` to the install command for project-local installation.
+
+The native pi package selects the English edition to avoid duplicate skill names. For Vietnamese, use the portable installer with `--agent pi --language vi` instead of the native package.
+
+### Bản tiếng Việt — learn-build-vn
+
+Bản này giữ cùng enterprise/ownership outcomes, HTML giàu visual và toàn bộ discussion context như `learn-build`. Technical terminology và specialized words giữ tiếng Anh. Toàn bộ source/test code, comments, docstrings, identifiers và runtime strings dùng tiếng Anh; phần giải thích/hướng dẫn còn lại dùng tiếng Việt.
+
+Trong Codex:
+
+```sh
+codex plugin marketplace upgrade learn-build-marketplace
+codex plugin add learn-build-vn@learn-build-marketplace
+```
+
+Nếu chưa thêm marketplace, chạy lệnh `marketplace add` ở mục Codex trước. Gọi skill với namespace `learn-build-vn`, ví dụ `$learn-build-vn:learn-blueprint`.
+
+Trong Claude Code:
+
+```text
+/plugin marketplace update learn-build-marketplace
+/plugin install learn-build-vn@learn-build-marketplace
+```
+
+Gọi `/learn-build-vn:learn-blueprint`, `/learn-build-vn:learn-guide` hoặc `/learn-build-vn:learn-pair`. Thêm marketplace trước nếu chưa có. Quy trình auto-update ở dưới áp dụng cho cả hai plugin; manual update dùng đúng tên plugin.
+
+Portable installation:
+
+```sh
+python3 scripts/install.py --agent codex --language vi
+```
+
+Hai bản portable dùng cùng tên `learn-blueprint`, `learn-guide`, `learn-pair`, nên mỗi destination chỉ chứa một ngôn ngữ. Khi đổi/cập nhật bản đã có, thêm `--force`; installer lưu backup bên ngoài thư mục discovery. Sau khi cài native plugin và xác nhận hoạt động trong session mới, có thể xóa hoặc chuyển ra ngoài discovery **chỉ ba thư mục skill local cũ** để tránh trùng. Không xóa toàn bộ thư mục skills hay plugin cache.
 
 ### Cursor — portable installer
 
@@ -144,17 +176,18 @@ Agent execution, independent review, runtime QA, and evidence that you understan
 .agents/plugins/marketplace.json       Codex marketplace
 .claude-plugin/marketplace.json        Claude Code marketplace
 package.json                          pi package discovery
-plugins/learn-build/
+plugins/learn-build/                  English edition
   .codex-plugin/plugin.json
   .claude-plugin/plugin.json
   skills/
     learn-blueprint/
     learn-guide/
     learn-pair/
+plugins/learn-build-vn/               Vietnamese edition, same structure
 scripts/install.py                    Portable, dependency-free installer
 ```
 
-All agents receive the same skill content. Each skill includes its own supporting references so it also works when installed separately. There are no runtime dependencies, hooks, MCP servers, or credentials required by this package. Product implementation may require tools appropriate to your project.
+Each language edition provides the same workflow across agents. Each skill includes its own supporting references so it also works when installed separately. There are no runtime dependencies, hooks, MCP servers, or credentials required by this package. Product implementation may require tools appropriate to your project.
 
 ## Compatibility and verification
 
