@@ -13,6 +13,11 @@
       "name": "learn-build-vn",
       "source": "./plugins/learn-build-vn",
       "description": "Build enterprise product với hướng dẫn tiếng Việt, technical terms/code tiếng Anh và full ownership."
+    },
+    {
+      "name": "learn-oss-vn",
+      "source": "./plugins/learn-oss-vn",
+      "description": "Học kỹ thuật từ open-source qua catalogue và visual recipes bằng tiếng Việt, dễ chia sẻ và áp dụng."
     }
   ],
   "metadata": {

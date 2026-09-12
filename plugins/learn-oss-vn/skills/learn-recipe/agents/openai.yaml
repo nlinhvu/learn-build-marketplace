@@ -1,0 +1,4 @@
+interface:
+  display_name: "Learn Recipe — Tiếng Việt"
+  short_description: "Hiểu kỹ thuật qua glossary, diagram và code thật."
+  default_prompt: "Dùng $learn-recipe viết bài về kỹ thuật tôi chọn, có glossary trực quan, step-by-step và code để tự áp dụng."

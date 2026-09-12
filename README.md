@@ -4,7 +4,7 @@ Build an enterprise product you understand and own, one runnable tutorial at a t
 
 The highest priority is both the enterprise product you intend and your ability to develop, change, diagnose, release, operate, and recover it without an AI coding agent. Rich visual HTML and durable discussion records support those outcomes. Delegated implementation remains welcome; agent completion and your independent ownership are tracked separately.
 
-This marketplace contains **two language editions: `learn-build` (English) and `learn-build-vn` (Vietnamese), each with the same three skills**. They connect product direction, architecture decisions, implementation, and hands-on verification without asking you to decide an entire future phase before you have learned from the current slice.
+This marketplace contains **`learn-build` (English) and `learn-build-vn` (Vietnamese), each with the same three product-building skills**, plus **`learn-oss-vn`**, a Vietnamese-first plugin for learning techniques from existing open-source projects. The Learn Build editions connect product direction, architecture decisions, implementation, and hands-on verification without asking you to decide an entire future phase before you have learned from the current slice.
 
 | Skill | Purpose |
 | --- | --- |
@@ -17,6 +17,50 @@ The workflow is **blueprint → next tutorial → implement and verify → feed 
 ## Install
 
 Choose **one installation method per agent**. Some agents discover other agents' skill directories too; remove an older duplicate installation if the same skill appears twice. Start a new agent session after installation.
+
+### Learn OSS — học từ open-source
+
+`learn-oss-vn` ưu tiên **dễ học → giúp cộng đồng hiểu và áp dụng → tự tin contribute**. Không phải workflow xây product của Learn Build.
+
+| Skill | Khi dùng |
+| --- | --- |
+| `learn-catalogue` | Khảo sát repo thành catalogue recipes theo category, coverage và prerequisites; đề xuất lộ trình học. |
+| `learn-recipe` | Viết hoặc đào sâu recipe được chọn; giải đáp, hỗ trợ thực hành và cập nhật bài cùng context. |
+
+Mỗi recipe là bài học độc lập: visual glossary, diagram đánh số gắn với step-by-step và code, ví dụ xuyên suốt, success/failure cases, trade-offs và cách áp dụng. Evidence bám source/commit; không mặc định coi mọi implementation là best practice. Diễn giải bằng tiếng Việt; technical terminology và toàn bộ source/test code (kể cả comments/docstrings) bằng tiếng Anh.
+
+Sau khi thêm marketplace theo hướng dẫn tương ứng bên dưới, cài bằng một cách:
+
+```sh
+codex plugin add learn-oss-vn@learn-build-marketplace
+```
+
+```text
+/plugin install learn-oss-vn@learn-build-marketplace
+```
+
+Hoặc từ checkout repository với portable installer:
+
+```sh
+python3 scripts/install.py --plugin learn-oss-vn --agent codex
+```
+
+Thay `codex` bằng `claude`, `cursor` hoặc `pi` khi cần. `--plugin learn-oss-vn` mặc định tiếng Việt; `--language en` chưa hỗ trợ. Hai skill mới có tên riêng, có thể cài cạnh Learn Build; không cài đồng thời bản native và portable của cùng skill. Native pi package vẫn chọn Learn Build English; dùng portable cho Learn OSS.
+
+Ví dụ yêu cầu:
+
+```text
+Dùng $learn-catalogue để lập bản đồ những kỹ thuật đáng học trong repo này.
+Dùng $learn-recipe viết bài về recipe tôi chọn, với glossary, diagram và code walkthrough.
+```
+
+Trong Claude Code, gọi `/learn-oss-vn:learn-catalogue` hoặc `/learn-oss-vn:learn-recipe`. Có thể bắt đầu trực tiếp từ một topic mà chưa có catalogue đầy đủ.
+
+Output mặc định ở `<invocation-workspace>/docs/learn-oss`: `index.html` và các folders theo category. Recipe HTML tự chứa phần cần để hiểu và thử áp dụng, không yêu cầu lịch sử chat hay CDN. Coverage nêu phần repo đã khảo sát/chưa khảo sát; catalogue không tự tuyên bố đã tìm được mọi kỹ thuật.
+
+`records/` lưu learning context bằng HTML để tiếp tục qua session; bài chia sẻ không nhúng thông tin cá nhân hoặc phụ thuộc records riêng. **Folder riêng không tự làm dữ liệu private**: trước khi chia sẻ phải kiểm tập files thực sự publish. Viết bài không tự cấp quyền publish, sửa source, mở PR, chạy workload tốn phí hay kiểm security trên hệ thống ngoài phạm vi.
+
+Nếu marketplace đã cài từ trước, refresh bằng `codex plugin marketplace upgrade learn-build-marketplace` hoặc `/plugin marketplace update learn-build-marketplace` trước khi cài plugin mới. Mở session mới sau khi cài.
 
 ### Codex — native marketplace
 
@@ -119,11 +163,11 @@ python3 scripts/install.py --dest /path/to/agent/skills
 
 The installer preserves each skill's references, templates, and assets. Identical installations are skipped. Differing existing skills are never overwritten unless you pass `--force`; previous versions are saved under `.learn-build-backups` beside the skills directory, outside the discovery tree. Keep those backups until you have verified the update.
 
-To update a portable installation, run `git pull --ff-only`, review changes, then repeat your installation command with `--force`. Portable copies do not update automatically. To uninstall, remove only the three installed `learn-*` directories from the chosen destination.
+To update a portable installation, run `git pull --ff-only`, review changes, then repeat your installation command with `--force`, preserving its `--plugin` and `--language` selection. Portable copies do not update automatically. To uninstall Learn Build, remove only `learn-blueprint`, `learn-guide`, and `learn-pair` from the chosen destination. For Learn OSS, remove only `learn-catalogue` and `learn-recipe`; leave the other skill set untouched.
 
 ### Native plugin updates
 
-Releases bump the version in both plugin manifests and `package.json`. Users following the repository's default branch can receive new versions when their host refreshes the marketplace; installations pinned to a tag or commit remain pinned.
+Each plugin's Codex and Claude manifests share its version. The two Learn Build language editions stay in sync; Learn OSS has an independent version. `package.json` versions the marketplace package, not every plugin. Users following the repository's default branch can receive new versions when their host refreshes the marketplace; installations pinned to a tag or commit remain pinned.
 
 In Claude Code, enable automatic updates once through `/plugin` → **Marketplaces** → **learn-build-marketplace** → **Enable auto-update**. Third-party marketplaces default to auto-update off. Apply downloaded updates with `/reload-plugins` or restart. See the [official auto-update guidance](https://code.claude.com/docs/en/discover-plugins#configure-auto-updates). To update manually:
 
@@ -184,10 +228,13 @@ plugins/learn-build/                  English edition
     learn-guide/
     learn-pair/
 plugins/learn-build-vn/               Vietnamese edition, same structure
+plugins/learn-oss-vn/                    Vietnamese-first open-source learning
+  skills/learn-catalogue/
+  skills/learn-recipe/
 scripts/install.py                    Portable, dependency-free installer
 ```
 
-Each language edition provides the same workflow across agents. Each skill includes its own supporting references so it also works when installed separately. There are no runtime dependencies, hooks, MCP servers, or credentials required by this package. Product implementation may require tools appropriate to your project.
+Each Learn Build language edition provides the same workflow across agents. Each skill, including Learn OSS, includes its own supporting references so it also works when installed separately. There are no runtime dependencies, hooks, MCP servers, or credentials required by this package. Product implementation or recipe experiments may require tools appropriate to your project.
 
 ## Compatibility and verification
 

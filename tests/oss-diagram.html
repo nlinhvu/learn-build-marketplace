@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kiểm tra kích thước SVG — Learn OSS</title>
+  <link rel="stylesheet" href="../plugins/learn-oss-vn/skills/learn-recipe/assets/recipe.css">
+</head>
+<body>
+<main>
+  <header>
+    <h1>SVG giữ nhãn đọc được</h1>
+    <p>Browser regression test dùng CSS thật của plugin. Kiểm ở viewport 390 px và 1280 px; kết quả cập nhật khi resize.</p>
+  </header>
+  <section>
+    <h2>Diagram rộng 1000 px, nhãn 16 px</h2>
+    <figure>
+      <p class="scroll-hint">Cuộn ngang trong diagram để xem bước cuối; có thể dùng Tab và phím mũi tên.</p>
+      <div id="wide" class="diagram" tabindex="0" role="region" aria-label="Diagram rộng, cuộn ngang">
+        <svg width="1000" height="120" viewBox="0 0 1000 120" role="img" aria-labelledby="wide-title">
+          <title id="wide-title">Request qua Validate tới Persist</title>
+          <g fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="10" y="20" width="220" height="70" rx="8"/>
+            <rect x="390" y="20" width="220" height="70" rx="8"/>
+            <rect x="770" y="20" width="220" height="70" rx="8"/>
+            <path d="M230 55 H380 l-10 -7 M380 55 l-10 7 M610 55 H760 l-10 -7 M760 55 l-10 7"/>
+          </g>
+          <g font-size="16"><text x="30" y="61">1 · Request</text><text x="410" y="61">2 · Validate</text><text x="790" y="61">3 · Persist</text></g>
+        </svg>
+      </div>
+      <figcaption>Giữ nguyên canvas để nhãn không co theo chiều rộng màn hình.</figcaption>
+    </figure>
+    <h2>Diagram nhỏ 240 px</h2>
+    <div id="small" class="diagram">
+      <svg width="240" height="60" viewBox="0 0 240 60" role="img" aria-labelledby="small-title">
+        <title id="small-title">Diagram nhỏ không cần cuộn</title>
+        <rect x="1" y="1" width="238" height="58" rx="8" fill="none" stroke="currentColor"/>
+        <text x="16" y="36" font-size="16">State: ready</text>
+      </svg>
+    </div>
+    <h2>Kết quả tự kiểm</h2>
+    <pre id="result" aria-live="polite">Waiting for layout…</pre>
+  </section>
+</main>
+<script>
+  // A responsive max-width rule must not shrink labels in a wide diagram.
+  function checkLayout() {
+    const wide = document.getElementById('wide');
+    const svg = wide.querySelector('svg');
+    const label = svg.querySelector('text');
+    const small = document.getElementById('small');
+    const metrics = {
+      viewport: document.documentElement.clientWidth,
+      page: document.documentElement.scrollWidth,
+      wideCanvas: svg.getBoundingClientRect().width,
+      wideContainer: wide.clientWidth,
+      wideScroll: wide.scrollWidth,
+      renderedLabel: parseFloat(getComputedStyle(label).fontSize) * label.getScreenCTM().a,
+      smallCanvas: small.querySelector('svg').getBoundingClientRect().width
+    };
+    const checks = {
+      readableLabel: metrics.renderedLabel >= 15.9,
+      preservedWideCanvas: Math.abs(metrics.wideCanvas - 1000) < 1,
+      localScrollWhenNeeded: wide.clientWidth >= 1000 || wide.scrollWidth > wide.clientWidth,
+      noPageOverflow: metrics.page <= metrics.viewport,
+      compactDiagramUnchanged: Math.abs(metrics.smallCanvas - 240) < 1 && small.scrollWidth === small.clientWidth
+    };
+    document.getElementById('result').textContent = JSON.stringify({
+      status: Object.values(checks).every(Boolean) ? 'PASS' : 'FAIL', checks, metrics
+    }, null, 2);
+  }
+  window.addEventListener('load', checkLayout);
+  window.addEventListener('resize', checkLayout);
+</script>
+</body>
+</html>

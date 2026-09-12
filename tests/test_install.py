@@ -134,6 +134,48 @@ class InstallerTests(unittest.TestCase):
         self.assertTrue(installer.identical(ROOT / 'plugins/learn-build-vn/skills/learn-guide',
                                            self.dest / 'learn-guide'))
 
+    def test_oss_install_preserves_build_skills_and_copies_complete_resources(self):
+        command = [sys.executable, str(ROOT / 'scripts/install.py'), '--dest', str(self.dest)]
+        build = subprocess.run(command, capture_output=True, text=True)
+        self.assertEqual(0, build.returncode, build.stderr)
+        before = {p.relative_to(self.dest): p.read_bytes() for p in self.dest.rglob('*') if p.is_file()}
+        result = subprocess.run(command + ['--plugin', 'learn-oss-vn'], capture_output=True, text=True)
+        self.assertEqual(0, result.returncode, result.stderr)
+        for relative, content in before.items():
+            self.assertEqual(content, (self.dest / relative).read_bytes())
+        for name in ('learn-catalogue', 'learn-recipe'):
+            source = ROOT / 'plugins/learn-oss-vn/skills' / name
+            self.assertTrue(installer.identical(source, self.dest / name))
+        self.assertEqual(5, len(list(self.dest.iterdir())))
+
+    def test_oss_dry_run_does_not_create_destination(self):
+        result = subprocess.run([sys.executable, str(ROOT / 'scripts/install.py'), '--dest', str(self.dest),
+                                 '--plugin', 'learn-oss-vn', '--dry-run'], capture_output=True, text=True)
+        self.assertEqual(0, result.returncode, result.stderr)
+        self.assertFalse(self.dest.exists())
+
+    def test_oss_unsupported_language_is_rejected_before_writes(self):
+        result = subprocess.run([sys.executable, str(ROOT / 'scripts/install.py'), '--dest', str(self.dest),
+                                 '--plugin', 'learn-oss-vn', '--language', 'en'], capture_output=True, text=True)
+        self.assertNotEqual(0, result.returncode)
+        self.assertFalse(self.dest.exists())
+
+    def test_oss_replacement_requires_force_and_saves_backup(self):
+        command = [sys.executable, str(ROOT / 'scripts/install.py'), '--dest', str(self.dest),
+                   '--plugin', 'learn-oss-vn', '--language', 'vi']
+        first = subprocess.run(command, capture_output=True, text=True)
+        self.assertEqual(0, first.returncode, first.stderr)
+        target = self.dest / 'learn-recipe/SKILL.md'
+        target.write_text('User recipe customizations', encoding='utf-8')
+        conflict = subprocess.run(command, capture_output=True, text=True)
+        self.assertNotEqual(0, conflict.returncode)
+        replaced = subprocess.run(command + ['--force'], capture_output=True, text=True)
+        self.assertEqual(0, replaced.returncode, replaced.stderr)
+        backups = list((self.dest.parent / '.learn-build-backups').rglob('learn-recipe/SKILL.md'))
+        self.assertEqual(1, len(backups))
+        self.assertEqual('User recipe customizations', backups[0].read_text(encoding='utf-8'))
+        self.assertTrue(installer.identical(ROOT / 'plugins/learn-oss-vn/skills/learn-recipe', target.parent))
+
 
 if __name__ == '__main__':
     unittest.main()

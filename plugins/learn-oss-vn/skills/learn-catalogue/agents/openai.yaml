@@ -1,0 +1,4 @@
+interface:
+  display_name: "Learn Catalogue — Tiếng Việt"
+  short_description: "Lập bản đồ recipes đáng học từ source của repo."
+  default_prompt: "Dùng $learn-catalogue để khảo sát repo này và lập catalogue recipes theo category cùng lộ trình học."

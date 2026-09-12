@@ -53,6 +53,47 @@ class DistributionTests(unittest.TestCase):
         with self.assertRaises(AssertionError):
             self.validate()
 
+    def test_oss_version_can_change_independently_of_build_and_package(self):
+        for kind in ('.codex-plugin', '.claude-plugin'):
+            manifest = self.root / 'plugins/learn-oss-vn' / kind / 'plugin.json'
+            data = json.loads(manifest.read_text(encoding='utf-8'))
+            data['version'] = '1.2.3'
+            manifest.write_text(json.dumps(data), encoding='utf-8')
+        self.validate()
+
+    def test_missing_oss_marketplace_entry_is_rejected(self):
+        manifest = self.root / '.agents/plugins/marketplace.json'
+        data = json.loads(manifest.read_text(encoding='utf-8'))
+        data['plugins'] = [entry for entry in data['plugins'] if entry['name'] != 'learn-oss-vn']
+        manifest.write_text(json.dumps(data), encoding='utf-8')
+        with self.assertRaises(AssertionError):
+            self.validate()
+
+    def test_oss_host_version_mismatch_is_rejected(self):
+        manifest = self.root / 'plugins/learn-oss-vn/.claude-plugin/plugin.json'
+        data = json.loads(manifest.read_text(encoding='utf-8'))
+        data['version'] = '9.0.0'
+        manifest.write_text(json.dumps(data), encoding='utf-8')
+        with self.assertRaises(AssertionError):
+            self.validate()
+
+    def test_oss_missing_visual_reference_is_rejected(self):
+        (self.root / 'plugins/learn-oss-vn/skills/learn-recipe/references/visual-explanation.md').unlink()
+        with self.assertRaises(AssertionError):
+            self.validate()
+
+    def test_oss_shared_contract_drift_is_rejected(self):
+        path = self.root / 'plugins/learn-oss-vn/skills/learn-recipe/references/learning-contract.md'
+        path.write_text(path.read_text(encoding='utf-8') + '\nUnexpected divergence\n', encoding='utf-8')
+        with self.assertRaises(AssertionError):
+            self.validate()
+
+    def test_oss_broken_local_link_is_rejected(self):
+        path = self.root / 'plugins/learn-oss-vn/skills/learn-recipe/references/recipe.md'
+        path.write_text(path.read_text(encoding='utf-8') + '\n[Missing](missing.md)\n', encoding='utf-8')
+        with self.assertRaises(AssertionError):
+            self.validate()
+
 
 if __name__ == '__main__':
     unittest.main()
