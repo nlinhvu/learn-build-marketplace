@@ -2,6 +2,8 @@
 
 Build an enterprise product you understand and own, one runnable tutorial at a time.
 
+The highest priority is both the enterprise product you intend and your ability to develop, change, diagnose, release, operate, and recover it without an AI coding agent. Rich visual HTML and durable discussion records support those outcomes. Delegated implementation remains welcome; agent completion and your independent ownership are tracked separately.
+
 This marketplace contains **one plugin, `learn-build`, with three skills**. It connects product direction, architecture decisions, implementation, and hands-on verification without asking you to decide an entire future phase before you have learned from the current slice.
 
 | Skill | Purpose |
@@ -85,7 +87,27 @@ python3 scripts/install.py --dest /path/to/agent/skills
 
 The installer preserves each skill's references, templates, and assets. Identical installations are skipped. Differing existing skills are never overwritten unless you pass `--force`; previous versions are saved under `.learn-build-backups` beside the skills directory, outside the discovery tree. Keep those backups until you have verified the update.
 
-To update a portable installation, run `git pull --ff-only`, review changes, then repeat your installation command with `--force`. To uninstall, remove only the three installed `learn-*` directories from the chosen destination. For native installations, use your agent's plugin or package manager to update or uninstall.
+To update a portable installation, run `git pull --ff-only`, review changes, then repeat your installation command with `--force`. Portable copies do not update automatically. To uninstall, remove only the three installed `learn-*` directories from the chosen destination.
+
+### Native plugin updates
+
+Releases bump the version in both plugin manifests and `package.json`. Users following the repository's default branch can receive new versions when their host refreshes the marketplace; installations pinned to a tag or commit remain pinned.
+
+In Claude Code, enable automatic updates once through `/plugin` → **Marketplaces** → **learn-build-marketplace** → **Enable auto-update**. Third-party marketplaces default to auto-update off. Apply downloaded updates with `/reload-plugins` or restart. See the [official auto-update guidance](https://code.claude.com/docs/en/discover-plugins#configure-auto-updates). To update manually:
+
+```sh
+claude plugin marketplace update learn-build-marketplace
+claude plugin update learn-build@learn-build-marketplace
+```
+
+For Codex CLI versions supporting these plugin commands, refresh the Git marketplace and install the current version, then start a new session:
+
+```sh
+codex plugin marketplace upgrade learn-build-marketplace
+codex plugin add learn-build@learn-build-marketplace
+```
+
+Automatic refresh depends on the host and user settings; a release cannot enable it for other users. Use the host's plugin/package manager to uninstall native installations.
 
 ## First session
 
@@ -109,6 +131,8 @@ Use learn-pair to explain this request flow and guide me through the real QA wal
 ```
 
 Documents default to `<invocation-workspace>/docs/learn`, even when application source lives in a nested directory. An explicit document root takes precedence. Existing learning documents are not silently moved.
+
+Discussion context is saved as you work, including unfinished questions, explanations, user corrections, non-architectural choices, and rejected alternatives. All new records are HTML: `discussions/` holds topic records, `adrs/` holds architectural decisions, and `user-stories/` holds actor goals and acceptance walkthroughs. Existing equivalent records keep their paths. `index.html` provides the current snapshot and links; a new session reads it and the relevant records, checks the actual source, and resumes the pending work. Tutorials stay current while historical reasoning remains available in clearly labeled record sections.
 
 Tutorials explain their own relevant constraints and decisions rather than requiring you to follow opaque section IDs. Updates describe the current implementation rather than narrating why an earlier draft was wrong. Security, tenancy, reliability, deployment, operations, recovery, and cost are introduced before the relevant product exposure; a prototype is not labeled production-ready.
 

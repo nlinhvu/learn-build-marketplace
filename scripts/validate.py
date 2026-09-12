@@ -36,7 +36,7 @@ def validate():
             assert not path.is_symlink(), path
             if not path.is_file():
                 continue
-            if path.name in ('learning-contract.md', 'html.md'):
+            if path.name in ('learning-contract.md', 'html.md', 'project-memory.md'):
                 old = shared.setdefault(path.name, path.read_bytes())
                 assert old == path.read_bytes(), f'Shared contract differs: {path}'
             if path.suffix in ('.md', '.yaml', '.html', '.css'):

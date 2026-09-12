@@ -26,11 +26,13 @@ Attach quality to actual changes: security/trust/secret boundaries, correctness/
 
 ## Manual QA and learning
 
+Use the linked user-story records defined in [project-memory.md](project-memory.md) as acceptance inputs. Develop walkthroughs for the current capability before dependent implementation instructions, while keeping future flows at their known level of detail. Map each current story to checkpoints and keep essential actions and expectations here in the tutorial. Preserve changes to story requirements and the reasons for them in the story/discussion records; link internal-only changes to an operational/verification scenario when no actor flow applies.
+
 A walkthrough includes the actor, setup/reset, ordered real actions, expected/actual results, a suitable negative/failure path, evidence, and cleanup/rollback. Use the real UI for UI claims, curl/CLI for APIs/processes, and authorized cloud tools for infrastructure. The agent can run QA or guide the user when access/tools are missing.
 
 After removing test-runner commands, manual QA must still be a walkthrough observing actual behavior. Assertions and unit tests are supplementary checks.
 
-Keep product behavior, quality evidence, and user understanding separate. Predicting state after a crash, diagnosing through logs, or changing a small contract can reveal what needs explaining. Do not turn this into a compulsory exam.
+Apply the independent-ownership loop in [learning-contract.md](learning-contract.md). Include a useful opportunity to apply the mechanism beyond copying the example, such as a small behavior variation, diagnosing a fault, or recovery using the documented tools. Give an observable outcome and optional hints/explanation; the user may decline or request more help. Keep product/QA evidence separate from what the user actually performed and what assistance was needed.
 
 ## Verify the artifact and error paths before handoff
 
@@ -42,6 +44,6 @@ Trace both success and failure through actual layers: does a callback emitting a
 
 When implementation differs from the guide, sync snippets, commands, diagrams, QA, and explanations with facts and requirements. If code fails acceptance, the tutorial remains unmet; do not change expectations to hide the bug. Material design changes return to discussion; update targets and next tutorials only after decisions are settled. Write future guides only when their inputs are ready.
 
-When syncing, remove editorial history and replace incorrect claims with correct explanations for the current baseline/target. Supplementary explainers do not replace in-place prerequisites. At the end, identify the knowledge the learner can use to decide the next step, rather than merely citing a decision identifier on another page.
+When syncing, remove editorial history from the tutorial and replace incorrect claims with correct explanations for the current baseline/target. Preserve discussion, user corrections, and superseded reasoning in the linked records under project-memory.md. Supplementary explainers do not replace in-place prerequisites. At the end, identify the knowledge the learner can use to decide the next step, rather than merely citing a decision identifier on another page.
 
 Hand off using the transition in [learning-contract.md](learning-contract.md): connect a concrete behavior/trace to the mechanism to reason about and the decision it prepares for. For work not yet practiced, state the planned activity and missing evidence; do not write the user's answer for them.

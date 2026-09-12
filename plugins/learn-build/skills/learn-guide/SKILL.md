@@ -5,30 +5,26 @@ description: Create or redesign the next incremental HTML tutorial so an enginee
 
 # Learn Guide
 
-Write an incremental tutorial that lets an engineer implement part of an enterprise product, understand its mechanisms, and prepare for the next architecture decision.
+Author the next runnable tutorial so the user advances the enterprise product and can understand and work on that capability without an AI coding agent.
 
-## Select the current step
+## Recover and select
 
-Read [learning-contract.md](references/learning-contract.md) for project/docs roots, ownership, the one HTML → one actual question → wait process, self-contained content, and documentation synchronization. This contract applies throughout the workflow.
+Read [learning-contract.md](references/learning-contract.md) and [project-memory.md](references/project-memory.md) for priorities, authority, decisions, and retained context. Inspect project instructions, blueprint/records, prior tutorial, relevant source/configuration/dependencies, and diffs. Recover the baseline, accepted and rejected choices, open questions, and ownership gaps.
 
-Read project instructions, blueprint/decisions, the previous tutorial, relevant source/configuration/dependencies, and diffs. Identify the baseline, outcome/demo, learning prerequisites, and decisions now due. An incomplete blueprint need not block work whose scope is already clear. Reuse existing inputs and authorization.
+Choose one demonstrable capability or operational outcome that runs without future tutorial code. Identify the independent ability it develops and the prerequisites it needs. Split excessive cognitive load into smaller outcomes. An incomplete blueprint need not block clear work; establish a minimal snapshot when absent.
 
-One tutorial adds a demonstrable capability or operational outcome to the baseline without needing future code to run. Split it when several capabilities/mechanisms or unfamiliar prerequisites make it too large. Future roadmap content remains a preview.
+## Resolve and specify
 
-## Resolve decisions and uncertainty
+Check actual paths, symbols, signatures, wiring, and package versions; verify critical external APIs against matching sources. Use a small experiment for uncertainty that could break the guide, without prebuilding the whole feature.
 
-Check actual paths, symbols, signatures, dependency versions, and wiring. Distinguish existing source from planned code. Verify critical external APIs against the matching package/source version. Uncertainty that could break dependent work needs a small spike or experiment, not a prebuilt reference implementation of the entire feature.
+Follow the shared decision process for material choices; dependent implementation instructions wait with dependent code. Persist discussion as it happens. Develop the current user stories into acceptance walkthroughs before those instructions, linking stories, decisions, and checkpoints. Internal-only work can use an operational scenario. Keep future stories at known intent.
 
-Follow the shared contract for decisions now due. While a decision is open, dependent implementation instructions also wait for an actual answer; do not write the full guide around a recommendation. Handle delegated routine choices within scope. Discuss and review material architecture, quality, or scope changes before dependent work.
+## Author and verify
 
-## Author the tutorial
+Use [tutorial.md](references/tutorial.md) for followable checkpoints, manual QA, ownership practice, and code verification. Apply [html.md](references/html.md) for rich glossary, explanations, visuals, trade-offs, cost/security reasoning, and conclusions.
 
-Use [tutorial.md](references/tutorial.md) for checkpoints, manual QA, and code verification, and [html.md](references/html.md) for presentation and HTML validation. Write `<learning-root>/tutorials/NN-topic.html` and update the relevant catalogue entries.
-
-Each checkpoint connects **why → glossary/mechanism/visual → exact code → run actions → expected result → troubleshooting**. Essential content must be available in place, with optional deeper material. Provide code the user can follow, not a task list for a coding agent. Author only the guide; do not implement the feature unless assigned.
+Write `<learning-root>/tutorials/NN-topic.html` and update the catalogue. Each checkpoint connects why → mechanism/visual/example → exact code → actions → expected result → diagnosis. Provide enough detail for independent work, with optional deeper material. Author the guide; implement only when assigned.
 
 ## Review and handoff
 
-Use an independent reviewer when available following [review.md](references/review.md). The author resolves findings, checks the exact artifact and HTML, then syncs affected facts and catalogue links. Code, QA, and explanations must map to the same explicit baseline or target.
-
-Hand off the checkpoint/baseline, available and missing evidence, learning gaps, open decisions, and next action. Compilation/review is not runtime evidence; agent QA is not user learning. The user writes the code or delegates implementation. When available, learn-pair supports discussion, debugging, QA, and synchronization. Create the next guide only when it is due.
+Use [review.md](references/review.md), with an independent reviewer when available. Resolve findings, verify the actual HTML/snippets, and synchronize records and snapshot. Report baseline/checkpoint, evidence and limits, ownership gaps, the pending decision, and next action. Keep authored, implemented, verified, and independently understood states separate. Learn-pair supports implementation and practice when available; create another guide only when due.

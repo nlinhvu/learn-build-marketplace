@@ -1,87 +1,57 @@
-# Learning experience and full ownership contract
+# Build the product and develop independent ownership
 
-## Two outcomes together
+## Highest priority
 
-Build the enterprise product the user intends: capability, quality, security, reliability, delivery, operations, and cost must have corresponding requirements and evidence. At the same time, the user must be able to explain mechanisms, change code, diagnose failures, operate and recover the system, and evaluate architecture decisions for the next step. Small demos are steps toward that product; do not silently reduce the target to a prototype.
+Build the enterprise product the user intends while developing their ability to work on it without an AI coding agent. These are joint outcomes: a working product does not establish ownership, and learning exercises do not replace the requested product.
 
-The blueprint maintains the whole product and its quality and ownership outcomes. A tutorial teaches through a runnable capability. Pairing feeds code, QA, and what the user has learned back into the roadmap. Agent tests do not demonstrate user understanding. The user can discuss or challenge an explanation instead of taking a quiz. Settle future decisions only when dependencies and learning readiness make them due.
+Ownership means the user can explain the architecture and mechanisms, implement and change behavior, test and diagnose failures, release and operate the system, recover it, and evaluate future design choices. Rich visual HTML is the defining teaching medium; durable discussion preserves that understanding and its rationale across sessions. Both serve the product and ownership outcomes.
 
-## From the current tutorial to the next decision
+Preserve the enterprise target and its requirements for capability, correctness, security, reliability, delivery, operations, recovery, and cost. Introduce required controls before their dependency or exposure; a local demo is an incremental step, not proof of production readiness. Scale the teaching step by splitting prerequisites or capabilities, not by lowering acceptance criteria.
 
-After a meaningful checkpoint, use source, QA, and actual discussion to connect: **observed behavior → a mechanism the user can reason about or is still struggling with → the decision now due → the next learning/build step**. Record briefly in the active tutorial: product/quality evidence, user learning evidence or a specific gap, settled/open decisions, and the next action. Sync only affected outcomes and dependencies to the blueprint; do not create another report, grading scale, or parallel checklist. Discussion, predicting and checking state, diagnosis, modification, and operation can all provide learning evidence. Record only what was observed; do not ask the user to prove again what they already know.
+## Shared references
 
-If a decision is technically due but the user says they do not understand a prerequisite, or their reasoning reveals a mistaken mechanism, keep the decision and dependent implementation pending. Use an explanation or trace at the checkpoint, or a small learning experiment runnable on a safe baseline, to observe the missing mechanism. Include setup, actions, expected state/failure, and cleanup. Return to the same decision with the new evidence, using one question and one HTML artifact. Do not choose the architecture for the user, lower acceptance criteria, or expose a capability without required controls. If evidence of understanding is absent, record it as unknown and continue discussion or independent work; do not infer incompetence or create a quiz gate. Make substantial catalogue changes only after discussion and independent review under the existing design contract.
+Read this contract at startup. Read [project-memory.md](project-memory.md) to recover and retain project context, and [html.md](html.md) before authoring or editing any output HTML. Role-specific references define blueprint planning, tutorial implementation guidance, and pairing.
 
-Example: the user does not understand why a retry creates two jobs. Trace a committed request whose response is lost → the client retries → a second transaction may create a second job. Transactions and identifying the same business action solve different problems. Observe retries safely in a local environment before choosing an idempotency lifecycle or store. If an invariant forbids duplicates, failing behavior still fails acceptance; a learning experiment does not authorize releasing the bug. Identity and isolation for a shared service are still required before shared exposure, but do not bundle those questions into the retry decision.
+## Learning through the real product
 
-Match cognitive load to the current step. Put essential context, code, visuals, and QA in the main content; put alternatives that are not yet due and deeper material in expandable sections. If one tutorial requires several unfamiliar mechanisms to settle independent decisions, split it by prerequisites and small demos. Do not solve this by removing explanations or authoring a whole phase in advance.
+Use the loop **observed behavior → mechanism to understand → decision now due → next build/learning step**. Each tutorial has a demonstrable product or operational outcome and an ownership outcome: what the user will be able to explain, change, debug, or operate independently, and what next decision that enables.
 
-## Project root and artifact layout
+Make independent work practical. Provide actual source locations, complete scoped edits, commands, expected observations, diagnostics, and relevant operational/recovery steps that the user can follow without asking an agent to invent missing work. Use source, standard tools, and documentation as reusable resources. An agent prompt is not a substitute for implementation or operating instructions.
 
-Determine the project root once from the workspace where the user starts the workflow, or from an explicitly designated root. Prefer an explicitly requested documentation path. Git roots, build files, and submodules help locate source; they do not automatically redefine the project root. Preserve that root across skills and changes of working directory for builds.
+Respect whether the user implements personally or delegates. Delegation can accelerate delivery; preserve explanations and opportunities to reason through, modify, diagnose, or operate that same capability. When useful, offer a small variation, fault diagnosis, or recovery task beyond the demonstrated example, with gradually less guidance. Keep it within accepted scope; do not force an exercise, withhold requested help, or make the user redo known work. Record what the user did, assistance needed, and unpracticed abilities as unknown.
 
-For example, a workflow starts at `/workspace/product`, with source at `/workspace/product/app`:
+Evidence of ownership can come from discussion, challenging an explanation, predicting state and checking it, making a change, diagnosing a failure, or performing an operational task. Agent tests, code review, silence, and agreement do not establish user understanding. Avoid compulsory quizzes or grading.
 
-```text
-/workspace/product/
-├── docs/learn/
-│   ├── index.html
-│   ├── learn.css
-│   ├── tutorials/NN-topic.html
-│   ├── decisions/NN-one-question.html
-│   └── explainers/topic.html
-└── app/                          source/build root
-```
+If the user expresses confusion or reveals a mistaken prerequisite for a consequential decision, explain at the checkpoint using a trace or a small safe experiment: setup, actions, expected state/failure, and cleanup. Keep that decision and dependent implementation pending, then return to the same question. Absence of evidence alone is not evidence of confusion; record unknowns and continue useful work.
 
-Record the project, learning, and source roots in the blueprint's baseline section; guide and pair read them there. No separate state file is needed. Create directories only when they have a corresponding artifact. Calculate source links from the actual HTML file location.
+## Roots and scope
 
-The default learning root is `<project-root>/docs/learn`. Existing documentation in a source subdirectory does not justify making that subdirectory the new root. Read it as context and identify any layout mismatch. Do not automatically move, delete, or copy all documentation, or change the canonical root. If the user asks to edit a specific file elsewhere, edit that file; migrate only when assigned. For new artifacts, use the chosen learning root without recreating all old documents merely to fill out the directory tree.
+Establish the project root from the invocation workspace or explicit user designation. The default learning root is `<project-root>/docs/learn`; an explicit documentation path takes precedence. Record project, learning, and source roots in `index.html`. Nested source/build/git directories and later changes of working directory do not redefine them.
 
-## Asking and settling decisions
+Use existing documents as context without moving, copying, or migrating them unless assigned. Edit a specifically requested file in its actual location. Create directories only for needed artifacts, and resolve links from their actual location.
 
-### Identify the question that is due
+Reuse existing authorization. Authoring a guide does not authorize implementing its feature. Pairing respects the assigned collaboration mode. Documentation retention does not override read-only scope, and verification does not authorize unassigned deployment, production changes, or spending.
 
-Read the context and reuse existing decisions and specific delegated choices. Routine choices within the assigned scope need no additional approval. Ask **one question per turn**, with only **one pending question across the workflow**. Defer other uncertainties with triggers. Do not combine independent questions as subquestions, multiple form fields, or a list at handoff.
+## Decisions: one HTML → one question → answer
 
-### Prepare one decision HTML artifact
+Read source and prior records before asking what they can answer. Handle delegated routine choices within scope. Material changes to contracts, lifecycle/concurrency, trust or data boundaries, quality, budget, or roadmap need the user's decision before dependent work. Keep only one pending question; defer others with explicit triggers and finish the current branch before opening another.
 
-Give each question its own `decisions/NN-topic.html` file about one subject. Provide enough substance for the user to reason:
+For a decision now due:
 
-1. The question, affected outcome, baseline, why it must be decided now, and the dependent work waiting on it.
-2. An in-place glossary: each new term's meaning, ownership, example from the product/source, and place in the flow.
-3. A visual of the mechanism and each option: paths, boundaries, or changing state, with captions/legends and worked input/output.
-4. Advantages and disadvantages compared on the same dimensions, including failure, security, operations, reversibility, and revisit triggers. Label recommendations accurately with long-term, cost, short-term, or least code change tags.
-5. Engineering and learning effort, runtime/resource/operating costs, and migration costs. State assumptions; monetary prices require current sources. If there is no monetary cost yet, say so rather than omitting cost.
-6. Room to choose, write another option, combine options with reasons, challenge the premise, or request further explanation. Do not force A/B/C answers.
+1. Create or update its own `decisions/NN-topic.html` using the rich explanation contract in html.md. State the question, baseline, why now, and blocked work. Compare real alternatives with a reasoned recommendation, accurately tagged long-term, cost, short-term, or least code change.
+2. Verify option semantics, APIs, versions, and diagnostics. State facts, inferences, estimates, and unknowns separately. For concurrency/streaming, compare demand, buffer bounds, thread ownership, cancellation, and error/terminal propagation at the same boundary. Line counts or one happy-path spike do not establish total cost or reversibility.
+3. Validate and open an available preview, then provide the artifact link beside one actual question in conversation. Support freeform responses, combined options, challenges, and requests for explanation. No fake forms or Submit buttons. If preview is unavailable, link the file and state the limitation.
+4. Yield for the answer. Keep an already asked question pending without repeating it. Neither an HTML question alone, recommendation, silence, default selection, nor generic “continue” settles a choice.
+5. Record the answer and rationale on that page and in the linked context records. Further uncertainty calls for explanation, not inferred approval.
 
-Separate facts, inferences, and estimates. Check API/types, option semantics, and diagnostics against the actual version. For concurrency and streaming, compare demand, buffer bounds, thread ownership, cancellation, and error/terminal propagation at the same boundary when relevant. Adapter line counts, one happy-path spike, or the absence of warnings do not establish total cost, risk, or reversibility. State what remains unmeasured and the conditions behind the recommendation.
+While a choice remains open, both dependent code and dependent implementation instructions wait. Continue independent checkpoints, comparisons, and small experiments without turning them into a selected target. An explicitly requested draft under an assumption remains labeled as such.
 
-### Present the artifact, ask in conversation, then wait
+## Synchronization and handoff
 
-Format and validate using [html.md](html.md), open an available preview/browser, and put a clickable artifact link next to the question. If the UI cannot open, link the created file and state the limitation. Do not replace HTML with a CLI table or claim to have inspected rendering. Use an interaction tool that supports freeform answers; if only fixed options are available, ask in plain text. Do not create a fake form or Submit button.
+Update affected documents directly when facts and authorization suffice. Current teaching sections must align source/snippets, commands, diagrams, QA, and explanations to an explicit baseline or target. Distinguish planned code from implemented code; retain unmet criteria when implementation is wrong. Preserve historical reasoning under project-memory.md while removing editorial correction chatter from current lessons.
 
-After presenting the artifact, ask **one actual question in the conversation**, then yield and wait for the user. A question inside the HTML does not replace this step. If the question was asked in an earlier turn, keep it pending without repeating it. Do not author questions in batches; the next question depends on the answer just received.
+Integrate follow-up explanations into the relevant checkpoint so later readers can proceed independently. State the actual invariant or decision, why it applies, and its consequences where used; identifiers and links add provenance rather than replacing that explanation.
 
-When the user answers, explain or adjust the page if they are still uncertain, and record the settled choice and rationale in that same file. A recommendation, pending label, compile spike, generic instruction to continue, silence, or default selection is neither a choice nor evidence of understanding. Keep decision HTML for tutorial reuse, while retaining essential content within the tutorial itself.
+At meaningful checkpoints, record product/quality evidence, observed ownership evidence or specific gaps, the pending decision, and next action. Sync affected catalogue dependencies and the snapshot, without duplicating full progress checklists. Keep design acceptance, guide readiness, implementation, runtime QA, and user ownership separate. A completed agent assignment establishes only its own scope.
 
-### Work allowed while a decision is open
-
-If a decision changes a public contract, concurrency/lifecycle, trust boundary, or checkpoint implementation, **both dependent code and dependent implementation instructions remain pending**. Do not write or publish a full tutorial around a default option and ask for the answer at the end.
-
-Continue explanations, comparison snippets, small spikes, or independent checkpoints to gather evidence; these do not become the selected target. If the user explicitly requests a draft under a specific assumption, produce that draft with its assumptions and limits. Do not treat it as an implementation decision.
-
-## Each page stands on its own
-
-Where an invariant, decision, or prerequisite is used, state **its actual content + why it applies + its consequences for the current code/QA**. For example: “Each run emits only one terminal event; both the error and completion branches pass through the terminal guard to prevent two results.” An `INV-3` identifier or blueprint link supplies additional provenance, not a substitute for this explanation.
-
-The glossary needed for the code, and the context and visualization needed for its mechanism, must appear in the current tutorial/decision. Repeat essential material from earlier pages with appropriate wording, without copying entire chapters. Links to full source, decisions, and explainers support deeper study or verification. When an invariant or decision changes, check its restatements in affected tutorials for consistency; intentional duplication must be synchronized.
-
-Each new mechanism needs a causal explanation of its algorithm or boundary, plus a worked example: concrete input → transformations/intermediate states → output. Identify the symbols implementing each step and relevant branches/failures. Use sequence diagrams for interactions, state diagrams for lifecycles, graphs for ownership/dependencies, and trace tables for algorithms. Provide enough visualization to follow the causal flow; decorative boxes or component names alone are insufficient. Interactive stepping helps with multiple transitions or races, but does not replace explanatory text or justify invented chart values.
-
-## Current documentation, not editing history
-
-After implementation, pairing, or reviewer findings, rewrite explanations, snippets, diagrams, commands, and QA so they describe the same current baseline/target. Remove incorrect claims and accounts of what an older draft got wrong, what the reviewer fixed, “the documentation previously showed…”, “correction…”, or document revision comparisons. Do not retain incorrect reasoning and negate it below. Reviewers return findings to the author; they do not insert review dialogue into the lesson.
-
-Preserve valid rationale for the current design, actual limits and evidence, unmet acceptance criteria, and pending status. Distinguish current source from code the tutorial intends to create; do not claim planned code is implemented. Checkpoints may use diffs to apply changes from an identified baseline to a target, without narrating edits to the document itself. If migration between runtime versions is the user's task, explain it using two clear baselines; that is not editorial history.
-
-When the user asks more about a mechanism, sync the essential explanation into the original checkpoint and keep a deeper explainer if useful. A later reading should not depend on asking the same follow-up. End the tutorial by stating the specific knowledge used and the next decision it prepares for. Do not open several questions or mark the user as having understood.
+At a product milestone, use these same records to assess whether the intended product requirements are met and what the user can do using source, docs, and standard tools without agent guidance: navigate/explain the system, evaluate and implement a new change, diagnose failures, release/operate, and recover it. Identify remaining gaps and practical next steps; do not claim full ownership from delivered code, polished documents, or agent-run checks.

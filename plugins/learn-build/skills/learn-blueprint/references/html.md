@@ -1,24 +1,40 @@
-# HTML engineers can read and follow
+# Rich HTML for independent understanding
 
-Save discussion visuals and trade-offs in the documentation. Preserve the learning root established in [learning-contract.md](learning-contract.md). Reuse existing HTML/CSS there; copy [learn.css](../assets/learn.css) as a starting point if the project has no style.
+Rich visual explanation is the defining quality of all output HTML: blueprints, tutorials, decisions, discussions, ADRs, user stories, and explainers. It must help the user understand and work on the real product independently, serving the highest priority in [learning-contract.md](learning-contract.md).
 
-## Content organization
+## Content the reader can reason from
 
-Use semantic HTML with `lang="en"`, UTF-8, a viewport, a short title, nav/main/section elements, a heading hierarchy, and stable IDs. Start with the outcome and next action. Show immediately needed material first, with an in-place glossary and expandable deep dives/alternatives. Give code exact paths/symbols, escape &, <, and >, and preserve whitespace with independently scrollable pre/code blocks. Source links must resolve in the artifact's actual context.
+For every substantive topic, provide:
 
-Choose visuals to fit the question: sequence diagrams for interactions, state diagrams for lifecycles, dependency graphs for ordering, worked traces for algorithms, graphs for boundaries/dependencies, and tables for trade-offs. Render diagrams using inline SVG/HTML or an available renderer; unrendered Mermaid source does not count as a diagram. Include captions/legends and distinguish current/target and observed/expected. Quantitative charts need evidence or explicit assumption labels. Every new mechanism or architecture needs a visual sufficient to follow its causal flow and a worked input → intermediate states/steps → output example tied to real symbols. Use interactive stepping or branch comparison when useful; do not force every chart type into one page.
+- **Detailed in-place glossary:** plain meaning, responsibility/ownership, concrete product example, and place in the flow.
+- **Context and causal explanation:** the problem, why it matters, how the mechanism works, applicable constraints, and consequences for the code or operation.
+- **Rendered visuals and worked examples:** diagrams, graphs, and flows with labeled boundaries, arrows/states, captions and legends. Trace concrete input → intermediate states → output, including relevant failures and actual source symbols.
+- **Comparable alternatives:** benefits and drawbacks on the same dimensions, including engineering/learning effort, runtime/resource/operating and migration costs, security/trust/data implications, reliability, and reversibility where relevant. State assumptions and unknowns; use current sources for monetary prices. Explain when there is no monetary cost yet or a dimension does not apply.
+- **Reasoned conclusion:** what evidence supports, why options were selected/rejected/deferred, consequences, limits, and the next action or unresolved question. Do not invent a decision to finish the page.
 
-The optional CSS provides wrap, top, eyebrow, lede, toc, grid/two, card/selected, note/pending, table-scroll, flow, diagram/lane/node/arrow, small, and tag classes. It is a starting point, not a fixed section count. Inline interaction JavaScript must work with the documented way of opening the artifact; avoid mandatory CDNs and requests outside the assigned scope.
+State the actual invariant, decision, or prerequisite and its implications where used. Links support provenance and deeper study; readers must not need another chat to understand essential content. Keep necessary code, explanation, visuals, and QA in place. Use expandable sections for deeper analysis, alternatives, and history; organize depth without removing it.
 
-## Copyable, verifiable code
+Choose visuals by the relationship: sequence diagrams for interactions, state diagrams for lifecycles, dependency/ownership graphs for boundaries and ordering, trace tables for algorithms, and comparison tables for trade-offs. Interactive stepping or scenario comparison helps with races and multiple transitions. Render with inline SVG/HTML or an available renderer; unrendered Mermaid source does not count. Decorative component boxes do not explain causality. Quantitative graphs require evidence or labeled assumptions; no chart quota or invented values.
 
-Code in HTML must preserve its language syntax after HTML entity decoding. Do not add an extra layer of Java/JSON/shell escaping in pre/code. When editing logic or literals, extract code from the final HTML to verify it. Do not validate a different temporary source and claim the artifact itself passed. For fragments, verify them within their documented scope/anchor; compiling a fragment does not mean the whole tutorial was built.
+## Durable records are rich HTML too
 
-## Before handoff
+Use [project-memory.md](project-memory.md) for record fields and lifecycle. Put current position and resume links first; retain dated historical entries with stable IDs and explicit rejected/disproved/superseded labels. Preserve their glossary, worked traces, visuals, cost/security analysis, and conclusions. A brief metadata update need not repeat the whole explanation. Record outlines define retained content, not permission to output only a status ledger.
 
-1. Use an available formatter/HTML5 validator. Fix structure, escaping, accessibility semantics, duplicate IDs, local links, and fragments. A custom parser or `xmllint` does not replace HTML5 validation; if those are all that were used, describe the actual checks. Do not disable a rule to hide a content problem.
-2. Open the page in a browser at desktop and mobile sizes, expand details and interactions, and inspect screenshots directly. Check text, code, tables, diagrams, contrast, focus/keyboard behavior, and overflow. Wide tables need their own scroll area and a scroll cue when needed; the page must not overflow horizontally.
-3. Compare visuals with source, decisions, and text. Follow a concrete input through the diagram and code to output, including relevant branches/failures. A polished graph with incorrect branches/flow or only component names does not teach the mechanism.
-4. Report the actual validation scope. If a browser or tool is unavailable, perform available checks and state that rendering is unverified; do not claim visual QA passed. After an edit, recheck only affected content and related links.
+Current teaching sections explain the current baseline/target without editorial revision chatter. Historical sections preserve prior reasoning and corrections with links to the current position, so obsolete claims cannot be mistaken for current guidance.
 
-Keep enough evidence, version, and environment context to identify the document's baseline, without annotating every sentence. Do not edit unrelated artifacts. Read the page independently to verify its context: essential glossary, invariants/decisions, and explanations must be present in place. Links add provenance and depth. Remove editorial history; do not preserve incorrect reasoning followed by a correction.
+## Structure and code
+
+Reuse project HTML/CSS; [learn.css](../assets/learn.css) is a starting point when needed. Use semantic HTML with the document's language, UTF-8, viewport, title, navigation, main/section elements, heading hierarchy, and stable IDs. Start with outcome and next action. Use captions, accessible controls, and independently scrollable wide code/tables with scroll cues. Avoid page-wide horizontal overflow.
+
+Give code exact paths/symbols and complete scoped edits. Escape HTML characters while preserving decoded language syntax and whitespace in pre/code; do not add extra Java/JSON/shell escaping. Verify code extracted from the final HTML, within its documented baseline or fragment context. Another scratch implementation does not validate the delivered snippets, and compilation does not prove runtime behavior.
+
+Resolve local links/fragments from the actual file location. Interaction must work with the documented opening method; avoid mandatory CDNs or external requests outside scope.
+
+## Verify before handoff
+
+1. Use an available formatter/HTML5 validator. Check structure, escaping, accessibility semantics, duplicate IDs, links, and fragments. A custom parser or xmllint is a limited check, not HTML5 validation.
+2. Open in a browser at desktop/mobile widths and inspect screenshots. Exercise details, interaction, keyboard/focus, code/table scrolling, contrast, and overflow.
+3. Read each substantive page independently against the content bar above. Follow a real input through its visuals and code to success/failure; confirm glossary, reasoning, trade-offs, cost/security, and conclusions agree with source and decisions.
+4. Report the actual scope and missing evidence. If tools are unavailable, perform available checks and mark rendering or execution unverified. Recheck affected content and links after edits.
+
+Checks cover record pages and tutorials equally. A visually polished artifact does not by itself establish product correctness or user ownership.

@@ -2,7 +2,11 @@
 
 The main page should let the user answer: who the product serves, what the system contains, where requests/data go, how code is released, what quality is required, and what to learn next. Keep deeper details in expandable sections. State needed invariants and decisions on the page itself, with source/ADR links as provenance. Use [learning-contract.md](learning-contract.md) for roots, questions, and self-contained content.
 
+Connect catalogue outcomes to work the user can eventually perform without an AI coding agent. At product milestones, revisit both enterprise acceptance and whole-product ownership using the shared contract; retain gaps even if delegated implementation is complete.
+
 ## Catalogue
+
+Link capability entries to the user stories already discussed and their scope status under [project-memory.md](project-memory.md). Record actor goals, rules, and edge cases during discovery, including candidate/deferred flows. The catalogue summarizes outcomes; the story records preserve their evolving intent. Do not wait for a tutorial to exist before saving a story, or invent future walkthrough detail to fill it.
 
 Each entry includes an intended outcome/demo, a mechanism-based learning outcome, technical prerequisites, learning prerequisites, target environment, and relevant quality concerns. State what the user will be able to explain, change, debug, or operate, and which next architecture decision that knowledge prepares them for. Preserve the path to the selected enterprise target; do not end the catalogue at a local demo. Label known languages/frameworks/libraries/infrastructure as Observed, Decided, Candidate, or Deferred. Do not fill in a stack merely to complete a template. Commands, exact files/symbols, and exercises are needed only when authoring the guide now due.
 
@@ -18,4 +22,4 @@ When selecting the next tutorial, use the transition in [learning-contract.md](l
 
 After a tutorial, or when an assumption is disproved, compare actual capabilities, evidence, remaining learning gaps, and next-step dependencies. Add, remove, split, merge, or reorder tutorials as needed. Update only affected content; do not regenerate the whole program each cycle.
 
-Without a new decision, record the candidate and impact while marking the existing target as needing review. Once the user chooses, update the target, catalogue, and useful ADR/rationale. Do not lower requirements to match incorrect implementation. Keep one link to the active tutorial, with detailed progress and evidence there, avoiding competing checklists.
+Without a new decision, record the candidate and impact while marking the existing target as needing review. Once the user chooses, update the target and catalogue, and record the choice with its authority and supersession links under project-memory.md. Preserve earlier rationale and rejected alternatives in the records. Do not lower requirements to match incorrect implementation. Keep one link to the active tutorial, with detailed progress and evidence there, avoiding competing checklists.
