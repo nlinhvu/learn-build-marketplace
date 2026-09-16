@@ -2,9 +2,9 @@
 
 ## Người đọc hiểu mechanism trước khi đọc sâu code
 
-**Visual glossary là nội dung dạy chính.** Với mỗi khái niệm cốt lõi: nghĩa dễ hiểu, vai trò/trách nhiệm, ví dụ trong scenario và vị trí có nhãn trên diagram. Nối các khái niệm lại để giải thích vì sao thuật toán hoạt động. Không chỉ liệt kê định nghĩa rồi đặt một hình không liên quan bên cạnh. Glossary chung có thể giúp tra cứu; phần cần để hiểu bài vẫn ở tại chỗ.
+**Visual glossary là nội dung dạy chính, không phải chương từ vựng bắt buộc ở đầu bài.** Giải thích mỗi khái niệm cốt lõi tại nơi cần dùng: nghĩa dễ hiểu, vai trò/trách nhiệm, ví dụ trong scenario và vị trí có nhãn trên diagram. Biểu diễn điều trừu tượng bằng cấu trúc dữ liệu, payload, phần dung lượng đã dùng/còn lại hoặc reference tới object. Một hình có thể giải thích nhiều khái niệm; không cần mỗi từ một hình. Text cards và chữ cái tra cứu không tự tạo thành visual glossary. Glossary tổng hợp có thể giúp tra cứu, không thay giải thích tại chỗ.
 
-Chọn một input/scenario cụ thể và dùng nhất quán tên đối tượng, dữ liệu và state xuyên suốt glossary → diagram → walkthrough → code → test. Ví von ngắn là tùy chọn; bỏ nếu cần thêm giải thích hoặc làm sai invariant.
+Chọn một input/scenario cụ thể và dùng nhất quán tên đối tượng, dữ liệu và state giữa glossary, diagram, walkthrough, code và test. Dùng nhãn có nghĩa tại chỗ, tránh bắt người đọc nhớ thêm mã A/B/C nếu tên object/biến đã đủ. Giải thích khái niệm bằng ví dụ nó là gì trước khi nói nó không phải gì. Ví von ngắn là tùy chọn; bỏ nếu làm sai invariant.
 
 ## Diagram phải mang lập luận
 
@@ -17,15 +17,17 @@ Chọn một input/scenario cụ thể và dùng nhất quán tên đối tượ
 | Học khái niệm nào trước, module nào phụ thuộc nhau | Dependency graph và ví dụ đọc một nhánh |
 | Bao nhiêu, đắt/chậm ở đâu | Biểu đồ có đơn vị và tỉ lệ, assumptions/evidence rõ |
 
-Render bằng inline SVG/HTML/CSS hoặc renderer khả dụng. ASCII art hay Mermaid source trong code block chỉ là phần hỗ trợ, không thay diagram đã render. Hình component trang trí không thay causal flow. Mũi tên ghi ý nghĩa; boundaries, legend và thứ tự phải đọc được mà không cần đoán theo màu.
+Render bằng inline SVG/HTML/CSS hoặc renderer khả dụng. ASCII art hay Mermaid source trong code block chỉ là phần hỗ trợ, không thay diagram đã render. Mỗi visual trả lời một câu hỏi: quan hệ components, đường đi của payload hoặc state trước/sau bước quyết định; không mặc định chuyển từng dòng code thành một box hoặc gom mọi góc nhìn vào một hình. Mũi tên ghi ý nghĩa; boundaries, legend và thứ tự không phụ thuộc riêng vào màu.
+
+Ví dụ: bài đóng gói theo budget có thể vẽ các item theo weight trong vùng capacity, giữ cùng item ở các frame trước/sau overflow; counter hiển thị riêng để phân biệt tổng dự kiến với item đã append. Bài về aliasing có thể vẽ hai reference trỏ vào cùng object để thấy vì sao mutation ảnh hưởng cả hai. Đây là cách chọn representation, không phải template bắt mọi recipe theo batching hoặc có nhiều hình.
 
 ## Diagram ↔ step-by-step ↔ code
 
 Với algorithm/runtime flow:
 
-1. Nêu input và state ban đầu, cùng assumptions ảnh hưởng đến kết quả.
+1. Nêu input và state ban đầu, cùng assumptions ảnh hưởng đến kết quả. Phân biệt **trace của một scenario** với **flow tổng quát**: trace ghi rõ nhánh đang theo; flow tổng quát thể hiện các nhánh ảnh hưởng kết quả, điều kiện trên arrows và điểm gặp lại. Không vẽ một nhánh rồi mô tả như mọi input đều đi qua nó.
 2. Đánh số các bước quan trọng trên hình. Phần walkthrough ngay cạnh/bên dưới dùng cùng số, cùng thuật ngữ.
-3. Mỗi bước giải thích **ai thực hiện → nhận gì → làm gì → state/output đổi thế nào → vì sao bước tiếp theo xảy ra**. Gắn source symbol và đoạn code tương ứng; người đọc lần được cả hai chiều từ hình tới code.
+3. Mỗi bước giải thích **ai thực hiện → nhận gì → làm gì → state/output đổi thế nào → vì sao bước tiếp theo xảy ra**. Nối rõ object/biến/method trong snippet với bước hoặc state trên hình; source link đơn lẻ không thay lời giải thích mối liên hệ. Người đọc lần được cả hai chiều từ hình tới code.
 4. Theo cùng scenario đến kết quả quan sát được. Nếu dữ liệu đi theo nhánh nội bộ/out-of-band, vẽ riêng với line style, nhãn và legend; giải thích khác biệt với payload chính.
 5. Đặt failure/edge case liên quan cạnh success case hoặc trong một trace đối chiếu. Chỉ ra bước phân nhánh, invariant bị vi phạm/được giữ, cách phát hiện và hệ quả.
 
@@ -41,6 +43,8 @@ Nêu chi phí liên quan: số operations/requests, memory, CPU, I/O, latency, c
 
 ## Giữ đường đọc dễ nhất
 
-Trực giác ngắn → visual glossary + diagram → walkthrough cụ thể → code → giới hạn và áp dụng. Đây là gợi ý tổ chức, không bắt mọi bài có cùng headings. Phần chuyên sâu có thể mở rộng; prerequisites thiết yếu và kết luận nằm trên đường đọc chính.
+Đường đọc cốt lõi đi theo câu hỏi của người đọc: thấy vấn đề/kết quả, hiểu mechanism rồi biết khi nào áp dụng. Không buộc mọi glossary, diagram và code thành các khối tách xa nhau theo một thứ tự cố định. Đặt giải thích khái niệm, hình, walkthrough và snippet liên quan gần nhau, kết lại bằng điều vừa hiểu. Full lab, proof và phân tích bổ sung có đường vào rõ nhưng không chắn đường tới kết luận. Giữ prerequisites và cảnh báo thiết yếu tại nơi cần dùng.
+
+Tự đọc hình cùng caption trước prose/code: có nhận ra input, đối tượng nào đổi, vì sao đổi và output/quan hệ chính không? Nếu hình chỉ chép prose/code vào các box nối tiếp mà không làm rõ quan hệ hoặc state, đổi representation hoặc thêm một state view phù hợp. Sau đó kiểm walkthrough có bổ sung lý do thay vì chỉ chép labels. Không dùng số lượng SVG, màu sắc hoặc animation làm tiêu chí giàu visualization.
 
 Stepper/animation chỉ thêm khi giúp theo dõi state. Có tiến/lùi/reset, nhãn keyboard-accessible và kết quả nhất quán khi đổi scenario. Bản tĩnh, captions và explanation vẫn đủ hiểu khi JavaScript không chạy. Kiểm lại hình, từng số bước, dữ liệu và code cùng nhau sau mỗi sửa đổi; không chỉ kiểm HTML có render.

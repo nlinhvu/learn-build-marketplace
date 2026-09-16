@@ -25,7 +25,9 @@ Entry chưa có bài không tạo link chết; dùng tên/ID để chọn. Topic
 
 Mở đầu bằng project giải quyết gì, phạm vi khảo sát và vài khái niệm để đọc bản đồ. Dùng glossary tại chỗ và diagram cho subsystem/dependency khi chúng giúp người đọc định hướng. Sau đó có catalogue theo category và đường học theo prerequisites, không nhất thiết trùng thứ tự folder.
 
-Đề xuất điểm bắt đầu dễ hiểu, tác động lớn, có ví dụ quan sát được. Người dùng được chọn bài khác; giải thích prerequisite thiếu thay vì cấm chuyển bài. Dependency graph phải phản ánh điều thực sự cần để học, không nối mọi bài thành chuỗi hoặc vòng không giải thích được.
+Catalogue nhiều entries cần lớp quét nhanh: ID/tên, một câu vấn đề hoặc kết quả học, prerequisites chính, độ khó và trạng thái bài. Dùng rows/cards gọn hoặc mục lục theo category; evidence, rationale và coverage sâu có thể mở rộng tại entry. Không bắt đọc nhiều đoạn của từng bài để so sánh lựa chọn; tránh boilerplate prerequisites lặp lại. Không buộc có search/filter bằng JavaScript nếu navigation tĩnh đã đủ.
+
+Đề xuất điểm bắt đầu dễ hiểu, tác động lớn, có ví dụ quan sát được. Nếu bài đã viết, điểm bắt đầu và đường học có link rõ tới bài, không chỉ vòng về entry; bài chưa viết cho chọn bằng ID, không tạo link giả. Người dùng được chọn bài khác; giải thích prerequisite thiếu thay vì cấm chuyển bài. Dependency graph phải phản ánh điều thực sự cần để học, không nối mọi bài thành chuỗi hoặc vòng không giải thích được.
 
 Public index chứa source baseline, coverage, document status và đường học chung. Snapshot về câu hỏi đang mở, lựa chọn cá nhân và learning evidence nằm ở `records/index.html`, không trộn vào bản catalogue để chia sẻ.
 

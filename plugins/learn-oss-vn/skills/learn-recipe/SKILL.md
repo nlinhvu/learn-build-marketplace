@@ -17,9 +17,9 @@ Chọn một vấn đề đủ nhỏ để giải thích bằng scenario xuyên 
 
 Đọc [recipe.md](references/recipe.md) để phân tích source, thực hành và áp dụng. Đọc [visual-explanation.md](references/visual-explanation.md) và [html.md](references/html.md) trước mọi HTML edit.
 
-Tạo/cập nhật `<learning-root>/<category>/<recipe-slug>.html`: glossary trực quan → diagram đã render → step-by-step dùng cùng input/state → code tương ứng → thử nghiệm và giới hạn. Mỗi runtime bước trên hình khớp walkthrough và source symbol. Có failure/edge case liên quan; diagram tĩnh dùng ví dụ đọc quan hệ thay vì trình tự giả.
+Tạo/cập nhật `<learning-root>/<category>/<recipe-slug>.html` theo chuỗi câu hỏi người đọc cần hiểu, không theo checklist các loại nội dung. Mỗi section giải quyết một câu hỏi; đặt giải thích khái niệm, visual, worked example và code liên quan gần nhau. Người đọc thấy vấn đề và kết quả cụ thể trước khi đọc sâu implementation. Mỗi runtime bước trên hình khớp walkthrough và source symbol; diagram tĩnh dùng ví dụ đọc quan hệ thay vì trình tự giả.
 
-Bài tự chứa context, glossary, code/setup/commands thiết yếu, expected observations, trade-offs và kết luận. Người đọc không cần chat, file lab riêng hay agent để nghĩ hộ phần còn thiếu. Viết rõ cách dùng ở project khác và constraint/convention riêng của repo gốc.
+Bài tự chứa context, glossary, code/setup/commands thiết yếu, expected observations và trade-offs. Tách full lab và phân tích chuyên sâu khỏi đường đọc cốt lõi bằng navigation hoặc nội dung mở rộng, không cắt mất chúng. Người đọc không cần chat, file lab riêng hay agent để nghĩ hộ phần còn thiếu. Viết rõ cách dùng ở project khác và constraint/convention riêng của repo gốc.
 
 ## Hỏi đáp, kiểm và bàn giao
 

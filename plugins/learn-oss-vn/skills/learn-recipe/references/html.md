@@ -19,8 +19,8 @@ Trích code từ HTML cuối để syntax/compile/test trong context mô tả kh
 ## Kiểm trước bàn giao
 
 1. Dùng formatter/HTML5 validator khả dụng; kiểm tags, escaping, IDs trùng, local links/fragments và headings. Parser tự viết chỉ là check cấu trúc giới hạn.
-2. Mở browser desktop/mobile khi có; xem screenshot, thử details/stepper, keyboard/focus và overflow. Không có browser thì ghi rendering chưa xác minh, tiếp tục kiểm phần khả dụng.
-3. Đọc riêng bài không có chat hoặc file lab: người mới có hiểu mechanism chính và đủ thông tin để thử áp dụng không? Lần input qua glossary, hình, số bước, code đến output/failure.
+2. Mở đúng output cuối trong browser khi có; kiểm glossary, diagram, code/table và phần mở rộng, không chỉ chụp đầu trang. Kiểm desktop và viewport hẹp, xác nhận kích thước thực tế trước khi nhận đã kiểm mobile. Thử details/stepper, keyboard/focus và overflow; hình rộng cần cue cuộn rõ hoặc state panels đọc được ở màn hình hẹp. Thiếu browser, bị chặn truy cập hoặc viewport không áp dụng thì ghi đúng giới hạn và kiểm phần khả dụng; không nhận source/CSS inspection là visual verification.
+3. Đọc riêng bài không có chat hoặc file lab: mỗi section trả lời câu hỏi gì, hình và snippet có được giải thích cạnh nhau, input có lần được tới output/failure? Kiểm khả năng giải thích của hình theo visual-explanation.md và đường đọc cốt lõi: có tới được kết luận mà không phải đi qua full lab? Với catalogue, thử chọn bài tới đúng recipe; với records, tìm current state và reasoning liên quan. Checks cấu trúc pass không thay các bước đọc này.
 4. Kiểm attribution, source baseline, claims và phạm vi tests/benchmarks. Tách observed, inferred, estimated, unknown. Xem lại boundary/security claims, không để hình và prose hứa nhiều hơn source.
 5. Khi chuẩn bị chia sẻ, kiểm tập files thực sự sẽ được gửi/publish theo [project-memory.md](project-memory.md); không tự publish sau khi kiểm.
 

@@ -15,7 +15,7 @@ Lập bản đồ học từ code thật: dễ hiểu trước, hữu ích cho c
 
 Dùng [catalogue.md](references/catalogue.md) cho coverage, phân loại, entry và prerequisites. Khảo sát các subsystem để tìm kỹ thuật có evidence; phân biệt phát hiện đã xác minh, ứng viên cần đọc thêm và kiến thức nền hỗ trợ. Không dừng ở vài files nổi bật rồi nhận đã tìm hết.
 
-Tạo/cập nhật `<learning-root>/index.html` với bản đồ project dễ hiểu, catalogue theo category, đường học đề xuất, source baseline và coverage. Mỗi recipe có stable ID, vấn đề, kết quả học, source anchors, prerequisites, độ khó có lý do và trạng thái tài liệu. Chỉ tạo bài chi tiết được chọn; một recipe có một file canonical trong category chính.
+Tạo/cập nhật `<learning-root>/index.html` với bản đồ project dễ hiểu, catalogue theo category, đường học đề xuất, source baseline và coverage. Cho người đọc quét nhanh vấn đề/kết quả học, prerequisites và trạng thái bài; mở sâu khi cần source anchors và lý do độ khó. Mỗi recipe có stable ID; bài đã viết có link trực tiếp tới file canonical trong category chính. Chỉ tạo bài chi tiết được chọn.
 
 Trước khi viết HTML, đọc [visual-explanation.md](references/visual-explanation.md) và [html.md](references/html.md). Catalogue cần giải thích các khái niệm/quan hệ để người mới chọn được bài, không chỉ bảng tên. Với dependency map dùng ví dụ đọc quan hệ, không bịa runtime sequence.
 
