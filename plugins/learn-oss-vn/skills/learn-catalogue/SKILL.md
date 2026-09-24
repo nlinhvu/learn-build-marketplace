@@ -1,11 +1,13 @@
 ---
 name: learn-catalogue
-description: Dùng khi người dùng muốn tìm những kỹ thuật đáng học trong một open-source repo, lập catalogue recipes theo category và prerequisites, hoặc cập nhật bản đồ học tập khi source thay đổi. Viết sâu hoặc hỏi đáp về một recipe thuộc learn-recipe; xây product mới thuộc workflow khác.
+description: Dùng khi người dùng muốn tìm những kỹ thuật đáng học trong một open-source repo, lập catalogue recipes theo category và prerequisites, hoặc cập nhật bản đồ học tập khi source thay đổi. Bộ docs về mục đích/cách dùng project thuộc learn-onboard; viết sâu một recipe thuộc learn-recipe.
 ---
 
 # Learn Catalogue
 
 Lập bản đồ học từ code thật: dễ hiểu trước, hữu ích cho cộng đồng tiếp theo, rồi hỗ trợ tự tin contribute. Catalogue rộng, recipe chi tiết theo lựa chọn; không biến toàn bộ repo thành giáo trình phải học tuần tự.
+
+Nếu yêu cầu chính là onboarding hoặc tạo documentation để developer hiểu và sử dụng project từ source, dùng `learn-onboard` khi khả dụng. Catalogue có thể link tới docs onboarding hiện có, nhưng không thay chúng bằng danh sách kỹ thuật đáng học.
 
 ## Khôi phục phạm vi
 

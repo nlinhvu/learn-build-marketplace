@@ -1,0 +1,4 @@
+interface:
+  display_name: "Learn Onboard — Tiếng Việt"
+  short_description: "Tạo docs từ source để hiểu, sử dụng và contribute."
+  default_prompt: "Dùng $learn-onboard tạo bộ docs từ source để hiểu, sử dụng và contribute vào project, gồm glossary, guides, reference, architecture, patterns và best practices có evidence."

@@ -12,7 +12,7 @@ SKILLS = ('learn-blueprint', 'learn-guide', 'learn-pair')
 SOURCE = Path(__file__).resolve().parents[1] / 'plugins' / 'learn-build' / 'skills'
 SOURCES = {'en': SOURCE, 'vi': SOURCE.parent.parent / 'learn-build-vn' / 'skills'}
 OSS_SOURCE = SOURCE.parent.parent / 'learn-oss-vn' / 'skills'
-OSS_SKILLS = ('learn-catalogue', 'learn-recipe')
+OSS_SKILLS = ('learn-onboard', 'learn-catalogue', 'learn-recipe')
 USER_DIRS = {'codex': '.codex/skills', 'claude': '.claude/skills', 'cursor': '.cursor/skills', 'pi': '.pi/agent/skills'}
 PROJECT_DIRS = {**USER_DIRS, 'codex': '.agents/skills', 'pi': '.pi/skills'}
 

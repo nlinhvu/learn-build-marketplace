@@ -1,19 +1,19 @@
 {
   "name": "learn-oss-vn",
-  "version": "0.1.1",
-  "description": "Học kỹ thuật từ open-source qua catalogue và recipes HTML giàu glossary, diagram, walkthrough để hiểu, chia sẻ và áp dụng.",
+  "version": "0.2.0",
+  "description": "Tạo docs từ source để hiểu, sử dụng và contribute: glossary, guides, reference, patterns và practices; học sâu qua catalogue và visual recipes.",
   "author": {
     "name": "nlinhvu"
   },
   "skills": "./skills/",
   "interface": {
     "displayName": "Learn OSS — Tiếng Việt",
-    "shortDescription": "Hiểu code thật qua glossary và visual recipes.",
-    "longDescription": "Khảo sát open-source thành catalogue có phân loại; đào sâu từng recipe bằng glossary, diagram và step-by-step gắn với code thật. Ưu tiên dễ học, giúp cộng đồng áp dụng, rồi tự tin contribute.",
+    "shortDescription": "Docs từ source, onboarding và visual recipes.",
+    "longDescription": "Từ source không có docs gốc, tạo bộ documentation giúp developer hiểu và sử dụng project, cùng glossary, architecture, patterns và best practices có evidence để contribute. Khảo sát kỹ thuật qua catalogue và đào sâu visual recipes.",
     "developerName": "nlinhvu",
     "category": "Productivity",
     "capabilities": [],
-    "defaultPrompt": "Giúp tôi lập catalogue những kỹ thuật đáng học trong repo này."
+    "defaultPrompt": "Giúp tôi hiểu mục đích project và tạo bộ docs onboarding từ source của repo này."
   },
   "homepage": "https://github.com/nlinhvu/learn-build-marketplace"
 }

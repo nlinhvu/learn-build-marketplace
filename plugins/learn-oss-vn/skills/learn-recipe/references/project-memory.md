@@ -3,10 +3,13 @@
 ## Hai nơi đọc, hai mục đích
 
 - `<learning-root>/index.html`: catalogue công khai, source baseline, coverage và trạng thái tài liệu; không nhúng thông tin riêng về người học.
+- `<learning-root>/onboarding/index.html`: entry của docs onboarding và navigation tới các trang concepts/getting started/guides/reference đã viết. Learning index link tới đây mà không thay catalogue hiện có.
 - `<learning-root>/records/index.html`: snapshot cho session tiếp theo, gồm roots, active recipe/ID, baseline, câu hỏi đang mở, lựa chọn, evidence học đã quan sát và bước tiếp theo; liên kết các topic records.
 - `<learning-root>/records/<topic-slug>.html`: nội dung trao đổi có ý nghĩa, gồm explanations/visuals đã phát triển, corrections, lý do chấp nhận/bác bỏ/hoãn, non-ADR choices, câu hỏi chưa giải quyết và evidence. Giữ ADR hoặc user story thực sự liên quan, không bịa decision/story cho một câu hỏi giải thích đơn thuần.
 
 Các paths là mặc định; giữ records tương đương hiện có. Chỉ tạo files có nội dung, không tạo cả bộ folders rỗng. Mọi learning records mới là HTML.
+
+Với onboarding, snapshot ghi thêm docs root/format, audience, nguồn được phép và paths bị loại trừ, active page/capability, page IDs/paths, coverage và anchors theo baseline. Khi quay lại hoặc đổi skill, giữ source exclusions và phân biệt trạng thái đã khảo sát, đã viết, source-reviewed, compiled, runtime-verified. Dùng chung records với catalogue/recipe nếu cùng learning root; không tạo lịch sử song song.
 
 ## Lưu khi trao đổi, không chỉ lúc kết phiên
 
@@ -23,6 +26,8 @@ Snapshot ghi current position và next action ngắn, dẫn tới records chi ti
 ## Ranh giới chia sẻ
 
 Public recipe/catalogue không chứa absolute paths cá nhân, secrets, thông tin người học hoặc links thiết yếu tới records riêng. Câu hỏi cá nhân có thể được tổng quát hóa thành explanation cho cộng đồng, còn nguyên context lưu riêng khi được phép.
+
+Các ranh giới chia sẻ này cũng áp dụng cho docs onboarding, kể cả khi xuất Markdown/AsciiDoc; tài liệu công khai phải đọc được mà không cần records hoặc lịch sử chat.
 
 **Thư mục `records/` không tự làm dữ liệu private.** Nếu cả repo/site được publish thì records cũng có thể lộ. Trước khi chia sẻ, xác định đúng tập files gồm recipe/catalogue công khai và assets cần thiết; loại records cá nhân khỏi tập đó và kiểm HTML/source code/comments, không chỉ giao diện hiển thị. Ẩn bằng CSS/details hoặc không đặt link không bảo vệ nội dung.
 

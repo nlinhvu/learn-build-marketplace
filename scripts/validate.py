@@ -9,7 +9,7 @@ NAMES = ('learn-blueprint', 'learn-guide', 'learn-pair')
 PLUGIN_SKILLS = {
     'learn-build': NAMES,
     'learn-build-vn': NAMES,
-    'learn-oss-vn': ('learn-catalogue', 'learn-recipe'),
+    'learn-oss-vn': ('learn-onboard', 'learn-catalogue', 'learn-recipe'),
 }
 PLUGINS = tuple(PLUGIN_SKILLS)
 BUILD_PLUGINS = ('learn-build', 'learn-build-vn')
@@ -55,7 +55,8 @@ def validate_plugin(plugin):
         if plugin.name == 'learn-oss-vn':
             required = ['agents/openai.yaml', 'assets/recipe.css'] + [
                 f'references/{filename}' for filename in SHARED_FILES if filename.endswith('.md')]
-            required.append('references/catalogue.md' if name == 'learn-catalogue' else 'references/recipe.md')
+            reference = {'learn-onboard': 'onboarding', 'learn-catalogue': 'catalogue', 'learn-recipe': 'recipe'}[name]
+            required.append(f'references/{reference}.md')
             for relative in required:
                 assert (skill / relative).is_file(), f'Missing skill resource: {skill / relative}'
         content = (skill / 'SKILL.md').read_text(encoding='utf-8')

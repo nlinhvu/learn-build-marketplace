@@ -143,10 +143,10 @@ class InstallerTests(unittest.TestCase):
         self.assertEqual(0, result.returncode, result.stderr)
         for relative, content in before.items():
             self.assertEqual(content, (self.dest / relative).read_bytes())
-        for name in ('learn-catalogue', 'learn-recipe'):
+        for name in ('learn-onboard', 'learn-catalogue', 'learn-recipe'):
             source = ROOT / 'plugins/learn-oss-vn/skills' / name
             self.assertTrue(installer.identical(source, self.dest / name))
-        self.assertEqual(5, len(list(self.dest.iterdir())))
+        self.assertEqual(6, len(list(self.dest.iterdir())))
 
     def test_oss_dry_run_does_not_create_destination(self):
         result = subprocess.run([sys.executable, str(ROOT / 'scripts/install.py'), '--dest', str(self.dest),

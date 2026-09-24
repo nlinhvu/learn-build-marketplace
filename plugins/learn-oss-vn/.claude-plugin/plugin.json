@@ -1,7 +1,7 @@
 {
   "name": "learn-oss-vn",
-  "version": "0.1.1",
-  "description": "Học kỹ thuật từ open-source qua catalogue và recipes HTML giàu glossary, diagram, walkthrough để hiểu, chia sẻ và áp dụng.",
+  "version": "0.2.0",
+  "description": "Tạo docs từ source để hiểu, sử dụng và contribute: glossary, guides, reference, patterns và practices; học sâu qua catalogue và visual recipes.",
   "author": { "name": "nlinhvu" },
   "homepage": "https://github.com/nlinhvu/learn-build-marketplace",
   "repository": "https://github.com/nlinhvu/learn-build-marketplace",

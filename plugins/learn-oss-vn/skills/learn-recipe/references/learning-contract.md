@@ -4,6 +4,8 @@
 
 Thứ tự ưu tiên: **dễ học và hiểu đúng → giúp cộng đồng hiểu và áp dụng → tự tin contribute vào open-source**. Người đọc có thể chưa biết project và không có lịch sử chat. Recipe là bài học độc lập, không phải ghi chú riêng hoặc workflow xây product mới. Giảm tải nhận thức bằng ví dụ xuyên suốt và độ sâu mở rộng, không bằng cách bỏ mechanism, prerequisites hoặc giới hạn quan trọng.
 
+Onboarding tạo nguồn documentation để developer hiểu mục đích và sử dụng project, catalogue giúp chọn kỹ thuật đáng học, recipe đào sâu một mechanism. Các đầu ra có thể liên kết nhưng không thay nhau. Bộ docs có thể xây từ source/tests/metadata mà không có docs upstream; không bắt hoàn thành catalogue trước khi viết docs.
+
 Giữ technical terminology và specialized words bằng tiếng Anh. Toàn bộ source/test code, identifiers, comments, docstrings, test names, assertions và runtime strings dùng tiếng Anh. Phần trao đổi, hướng dẫn, giải thích, nhãn diagram, kết luận và records còn lại dùng tiếng Việt. Giữ nguyên API names, commands, paths, log output và trích dẫn để không làm sai evidence.
 
 ## Codebase là nguồn kiểm chứng, không phải giáo điều
@@ -16,6 +18,8 @@ Ghi repo, commit/version và local modifications ảnh hưởng đến nhận đ
 
 Learning root mặc định `<invocation-workspace>/docs/learn-oss`; đường dẫn được chỉ định có ưu tiên. Source root có thể khác. Giữ roots đã ghi khi đổi working directory. Tái sử dụng tài liệu canonical; không tự move/migrate chúng.
 
+Docs onboarding mặc định ở `<learning-root>/onboarding/` với entry `index.html` riêng; learning index giữ catalogue và link tới docs nếu có. Format mặc định là HTML; yêu cầu Markdown/AsciiDoc hoặc output root khác có ưu tiên. Giữ exclusions nguồn người dùng đã đặt xuyên suốt các skills, cả khi khôi phục session; không đọc bản upstream online hoặc trong Git để thay nội dung bị loại trừ.
+
 Khảo sát/viết recipe không cấp quyền sửa source, mở PR, publish, deploy, scan hệ thống công khai hoặc chạy workload tốn phí. Thực hành trong môi trường local/cô lập được phép, với giới hạn tài nguyên và cleanup. Với yêu cầu read-only, chỉ đưa findings/đề xuất cập nhật, không nhận đã lưu records.
 
 Catalogue và bài chi tiết dùng cùng IDs và source baseline nhưng không buộc nhau hoàn chỉnh. Người dùng có thể chọn topic trực tiếp; tạo catalogue tối thiểu khi cần, rồi làm phần hữu ích. Hỏi một thông tin đang thiếu khi nó quyết định phạm vi hoặc tính đúng; không hỏi lại dữ liệu đã có hoặc bắt xác nhận những lựa chọn biên tập thông thường.
@@ -26,4 +30,4 @@ Giải thích → dự đoán một state/output → đối chiếu source/exper
 
 Agent viết bài/chạy tests không chứng minh người dùng đã hiểu hoặc có thể contribute. Lưu evidence người dùng thực sự làm/giải thích, mức trợ giúp và khoảng trống còn lại riêng với evidence thực thi. Khi người dùng nói chưa hiểu, bổ sung một trace/diagram cụ thể tại chỗ; không chỉ lặp lại định nghĩa.
 
-Trước khi kết phiên, lưu nội dung trao đổi có ý nghĩa và snapshot theo [project-memory.md](project-memory.md). Trước khi tạo/sửa HTML, đọc [visual-explanation.md](visual-explanation.md) và [html.md](html.md). Hai skill tự chứa các references này; không yêu cầu cài skill hay công cụ của một agent cụ thể.
+Trước khi kết phiên, lưu nội dung trao đổi có ý nghĩa và snapshot theo [project-memory.md](project-memory.md). Trước khi tạo/sửa HTML, đọc [visual-explanation.md](visual-explanation.md) và [html.md](html.md). Mỗi skill tự chứa các references này; không yêu cầu cài skill hay công cụ của một agent cụ thể.

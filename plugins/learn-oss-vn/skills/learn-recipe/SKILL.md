@@ -1,6 +1,6 @@
 ---
 name: learn-recipe
-description: Dùng khi người dùng chọn một kỹ thuật từ open-source để học qua recipe HTML, cần đào sâu hoặc hỏi đáp/thực hành theo recipe hiện có, hay cập nhật bài khi source thay đổi. Khảo sát toàn repo và lập catalogue thuộc learn-catalogue; không kéo mọi coding task vào workflow học tập.
+description: Dùng khi người dùng chọn một kỹ thuật từ open-source để học qua recipe HTML, cần đào sâu hoặc hỏi đáp/thực hành theo recipe hiện có, hay cập nhật bài khi source thay đổi. Catalogue kỹ thuật thuộc learn-catalogue; bộ docs về mục đích/cách dùng project thuộc learn-onboard.
 ---
 
 # Learn Recipe

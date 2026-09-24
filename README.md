@@ -4,7 +4,7 @@ Build an enterprise product you understand and own, one runnable tutorial at a t
 
 The highest priority is both the enterprise product you intend and your ability to develop, change, diagnose, release, operate, and recover it without an AI coding agent. Rich visual HTML and durable discussion records support those outcomes. Delegated implementation remains welcome; agent completion and your independent ownership are tracked separately.
 
-This marketplace contains **`learn-build` (English) and `learn-build-vn` (Vietnamese), each with the same three product-building skills**, plus **`learn-oss-vn`**, a Vietnamese-first plugin for learning techniques from existing open-source projects. The Learn Build editions connect product direction, architecture decisions, implementation, and hands-on verification without asking you to decide an entire future phase before you have learned from the current slice.
+This marketplace contains **`learn-build` (English) and `learn-build-vn` (Vietnamese), each with the same three product-building skills**, plus **`learn-oss-vn`**, a Vietnamese-first plugin for generating developer documentation from source and learning techniques from existing open-source projects. The Learn Build editions connect product direction, architecture decisions, implementation, and hands-on verification without asking you to decide an entire future phase before you have learned from the current slice.
 
 | Skill | Purpose |
 | --- | --- |
@@ -24,8 +24,11 @@ Choose **one installation method per agent**. Some agents discover other agents'
 
 | Skill | Khi dùng |
 | --- | --- |
+| `learn-onboard` | Từ source tạo docs để hiểu, sử dụng và contribute: mục đích, glossary, guides, reference, architecture, patterns và best practices có evidence; không cần docs gốc. |
 | `learn-catalogue` | Khảo sát repo thành catalogue recipes theo category, coverage và prerequisites; đề xuất lộ trình học. |
 | `learn-recipe` | Viết hoặc đào sâu recipe được chọn; giải đáp, hỗ trợ thực hành và cập nhật bài cùng context. |
+
+**Chọn skill khi gặp repo mới:** Không có thứ tự bắt buộc. Nếu cần hiểu project để **sử dụng hoặc contribute** và muốn có bộ docs về mục đích, setup, concepts, guides và reference, bắt đầu bằng `learn-onboard`. Nếu mục tiêu là **tìm kỹ thuật đáng học**, bắt đầu bằng `learn-catalogue`, rồi chọn từng kỹ thuật cho `learn-recipe`. Đã biết rõ một kỹ thuật cần học thì gọi thẳng `learn-recipe`, không phải lập catalogue trước. Khi cần cả tài liệu dự án lẫn bài học implementation, dùng `learn-onboard → learn-catalogue → learn-recipe`; hai nhánh này bổ sung cho nhau, không thay thế nhau.
 
 Mỗi recipe là bài học độc lập: visual glossary, diagram đánh số gắn với step-by-step và code, ví dụ xuyên suốt, success/failure cases, trade-offs và cách áp dụng. Evidence bám source/commit; không mặc định coi mọi implementation là best practice. Diễn giải bằng tiếng Việt; technical terminology và toàn bộ source/test code (kể cả comments/docstrings) bằng tiếng Anh.
 
@@ -45,18 +48,43 @@ Hoặc từ checkout repository với portable installer:
 python3 scripts/install.py --plugin learn-oss-vn --agent codex
 ```
 
-Thay `codex` bằng `claude`, `cursor` hoặc `pi` khi cần. `--plugin learn-oss-vn` mặc định tiếng Việt; `--language en` chưa hỗ trợ. Hai skill mới có tên riêng, có thể cài cạnh Learn Build; không cài đồng thời bản native và portable của cùng skill. Native pi package vẫn chọn Learn Build English; dùng portable cho Learn OSS.
+Thay `codex` bằng `claude`, `cursor` hoặc `pi` khi cần. `--plugin learn-oss-vn` mặc định tiếng Việt; `--language en` chưa hỗ trợ. Ba skill có tên riêng, có thể cài cạnh Learn Build; không cài đồng thời bản native và portable của cùng skill. Native pi package vẫn chọn Learn Build English; dùng portable cho Learn OSS.
 
 Ví dụ yêu cầu:
 
 ```text
+Dùng $learn-onboard tạo bộ docs để developer hiểu và sử dụng project này từ source, không cần docs upstream.
 Dùng $learn-catalogue để lập bản đồ những kỹ thuật đáng học trong repo này.
 Dùng $learn-recipe viết bài về recipe tôi chọn, với glossary, diagram và code walkthrough.
 ```
 
-Trong Claude Code, gọi `/learn-oss-vn:learn-catalogue` hoặc `/learn-oss-vn:learn-recipe`. Có thể bắt đầu trực tiếp từ một topic mà chưa có catalogue đầy đủ.
+Trong Claude Code, gọi `/learn-oss-vn:learn-onboard`, `/learn-oss-vn:learn-catalogue` hoặc `/learn-oss-vn:learn-recipe`. Có thể tạo docs onboarding hoặc bắt đầu trực tiếp từ một topic mà chưa có catalogue đầy đủ.
+
+Ví dụ onboarding Spring AI: **đầu vào là checkout Spring AI không có `spring-ai-docs`; đầu ra là bộ tài liệu giúp developer hiểu project và có nguồn tra cứu hợp lý**. Skill đọc source, tests, examples và build/configuration metadata để tìm mục đích, concepts, public APIs, cách setup, use cases và giới hạn. Tài liệu có cấu trúc phục vụ người đọc như docs framework, không hứa phục hồi nguyên văn hoặc tự động đạt độ phủ ngang docs upstream.
+
+```text
+Dùng $learn-onboard với source repo /path/to/spring-ai.
+Không đọc spring-ai-docs, docs sinh sẵn, lịch sử hoặc bản online của docs đó.
+Tạo bộ documentation bằng tiếng Việt tại /path/to/generated-spring-ai-docs,
+gồm mục đích project, concepts, getting started, guides và API/configuration reference.
+Viết nội dung thực chất từ source/tests; ghi rõ coverage và ví dụ chưa chạy.
+```
+
+Nếu thư mục docs gốc vẫn còn, chỉ cần loại trừ như trên, không cần xoá. Mặc định output là HTML nhiều trang mở offline; có thể yêu cầu Markdown hoặc AsciiDoc/Antora. Taxonomy dựa trên capability thực tế của repo; không cần dùng đúng folder layout hoặc toolchain của Spring. Khi source đổi, skill cập nhật các trang bị ảnh hưởng theo baseline và source anchors.
+
+Ví dụ Spring Framework mở rộng đầu ra: từ source **không tính các docs folders**, tạo cả bộ hướng dẫn/tra cứu có vai trò như `framework-docs` và kiến thức giúp developer contribute. Phần contributor gồm glossary gắn với symbols, architecture/module map, patterns với roles và runtime traces, conventions/best practices có rationale và exceptions, cùng walkthrough tìm chỗ sửa và regression tests. Skill phân biệt rule của project, practice quan sát trong code và đề xuất của tác giả; không coi mọi implementation là best practice.
+
+```text
+Dùng $learn-onboard với source repo /path/to/spring-framework,
+loại trừ framework-docs và các docs folders, kể cả bản online/generated.
+Tạo docs tại /path/to/generated-framework-docs: hướng dẫn/tra cứu cách dùng
+cộng với glossary, architecture, patterns, best practices và contribution walkthrough.
+Bám source/tests/metadata, ghi evidence và coverage cho cả hai phần.
+```
 
 Output mặc định ở `<invocation-workspace>/docs/learn-oss`: `index.html` và các folders theo category. Recipe HTML tự chứa phần cần để hiểu và thử áp dụng, không yêu cầu lịch sử chat hay CDN. Coverage nêu phần repo đã khảo sát/chưa khảo sát; catalogue không tự tuyên bố đã tìm được mọi kỹ thuật.
+
+Docs onboarding có entry riêng tại `<learning-root>/onboarding/index.html`, cùng các trang concepts, getting started, guides và reference đã viết; learning index link tới bộ docs và giữ catalogue/recipes hiện có. Docs trình bày rõ phần đã đọc source, đã compile và đã chạy thật; output từ mock không chứng minh external provider hoạt động.
 
 `records/` lưu learning context bằng HTML để tiếp tục qua session; bài chia sẻ không nhúng thông tin cá nhân hoặc phụ thuộc records riêng. **Folder riêng không tự làm dữ liệu private**: trước khi chia sẻ phải kiểm tập files thực sự publish. Viết bài không tự cấp quyền publish, sửa source, mở PR, chạy workload tốn phí hay kiểm security trên hệ thống ngoài phạm vi.
 
@@ -163,7 +191,7 @@ python3 scripts/install.py --dest /path/to/agent/skills
 
 The installer preserves each skill's references, templates, and assets. Identical installations are skipped. Differing existing skills are never overwritten unless you pass `--force`; previous versions are saved under `.learn-build-backups` beside the skills directory, outside the discovery tree. Keep those backups until you have verified the update.
 
-To update a portable installation, run `git pull --ff-only`, review changes, then repeat your installation command with `--force`, preserving its `--plugin` and `--language` selection. Portable copies do not update automatically. To uninstall Learn Build, remove only `learn-blueprint`, `learn-guide`, and `learn-pair` from the chosen destination. For Learn OSS, remove only `learn-catalogue` and `learn-recipe`; leave the other skill set untouched.
+To update a portable installation, run `git pull --ff-only`, review changes, then repeat your installation command with `--force`, preserving its `--plugin` and `--language` selection. Portable copies do not update automatically. To uninstall Learn Build, remove only `learn-blueprint`, `learn-guide`, and `learn-pair` from the chosen destination. For Learn OSS, remove only `learn-onboard`, `learn-catalogue`, and `learn-recipe`; leave the other skill set untouched.
 
 ### Native plugin updates
 
@@ -184,6 +212,7 @@ codex plugin add learn-build@learn-build-marketplace
 ```
 
 Automatic refresh depends on the host and user settings; a release cannot enable it for other users. Use the host's plugin/package manager to uninstall native installations.
+For `learn-oss-vn`, replace `learn-build` in the manual update commands above with `learn-oss-vn`; after updating, start a new session to load the new skills. Portable installations still require the explicit reinstall described earlier.
 
 ## First session
 
@@ -229,6 +258,7 @@ plugins/learn-build/                  English edition
     learn-pair/
 plugins/learn-build-vn/               Vietnamese edition, same structure
 plugins/learn-oss-vn/                    Vietnamese-first open-source learning
+  skills/learn-onboard/
   skills/learn-catalogue/
   skills/learn-recipe/
 scripts/install.py                    Portable, dependency-free installer
